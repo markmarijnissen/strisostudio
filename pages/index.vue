@@ -1,0 +1,3 @@
+<template>
+  <StrisoBoard />
+</template>
