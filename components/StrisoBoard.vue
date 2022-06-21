@@ -15,7 +15,7 @@
   position: relative;
   user-select: none;
   width: 100%;
-  /* border-radius: 3%; */
+  /* border-radius: 3%;git */
   background-color: beige;
   border: 1px solid #747457;
 }
@@ -34,10 +34,11 @@ export default {
   data() {
     return {
       size:  Math.min(window.innerHeight, window.innerWidth) / 11,
-      buttons: dcompose
+      buttons: dcompose,
     }
   },
   mounted() {
+    console.log("Striso Studio Build: ", new Date(process.env.build));
     window.addEventListener('resize', this.setSize);
     strisoBoardMounted++;
   },

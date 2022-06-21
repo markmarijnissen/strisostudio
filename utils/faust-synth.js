@@ -1,369 +1,48 @@
 
 /*
 Code generated with Faust version 2.40.12
-Compilation options: -lang wasm-ib -cn synth -es 1 -mcd 16 -single -ftz 2 
+Compilation options: -lang wasm -cn synth -es 1 -mcd 16 -single -ftz 2 
 */
 
 function getJSONsynth() {
-	return '{"name": "synth","filename": "synth.dsp","version": "2.40.12","compile_options": "-lang wasm-ib -cn synth -es 1 -mcd 16 -single -ftz 2","include_pathnames": ["/usr/local/share/faust","/usr/local/share/faust","/usr/share/faust",".","/tmp/sessions/F9CD4BBD8AE717E26F6FE568ABFA7CC508B3FFD6/web/wasmjs-worklet"],"size": 17424,"inputs": 0,"outputs": 1,"meta": [ { "compilation_options": "-single -scal -I libraries/ -I project/ -lang wasm" },{ "compile_options": "-lang wasm-ib -cn synth -es 1 -mcd 16 -single -ftz 2" },{ "fast_lib_author": "Piers Titus van der Torren (pierstitus@toverlamp.org)" },{ "fast_lib_licence": "Apache-2.0" },{ "fast_lib_name": "Faust Fast Approximations Library" },{ "filename": "synth.dsp" },{ "filters_lib_lowpass0_highpass1": "Copyright (C) 2003-2019 by Julius O. Smith III <jos@ccrma.stanford.edu>" },{ "filters_lib_name": "Faust Filters Library" },{ "filters_lib_svf_author": "Oleg Nesterov" },{ "filters_lib_svf_copyright": "Copyright (C) 2020 Oleg Nesterov <oleg@redhat.com>" },{ "filters_lib_svf_license": "MIT-style STK-4.3 license" },{ "filters_lib_version": "0.3" },{ "library_path0": "/libraries/stdfaust.lib" },{ "library_path1": "/project/fast.lib" },{ "library_path2": "/libraries/maths.lib" },{ "library_path3": "/libraries/platform.lib" },{ "library_path4": "/libraries/filters.lib" },{ "library_path5": "/libraries/signals.lib" },{ "library_path6": "/libraries/routes.lib" },{ "maths_lib_author": "GRAME" },{ "maths_lib_copyright": "GRAME" },{ "maths_lib_license": "LGPL with exception" },{ "maths_lib_name": "Faust Math Library" },{ "maths_lib_version": "2.5" },{ "name": "synth" },{ "platform_lib_name": "Generic Platform Library" },{ "platform_lib_version": "0.2" },{ "routes_lib_name": "Faust Signal Routing Library" },{ "routes_lib_version": "0.2" },{ "signals_lib_name": "Faust Signal Routing Library" },{ "signals_lib_version": "0.1" }],"ui": [ {"type": "hgroup","label": "strisy","items": [ {"type": "vgroup","label": "config","meta": [{ "0": "" }],"items": [ {"type": "hslider","label": "accDecay","shortname": "accDecay","address": "/strisy/config/accDecay","index": 16500,"meta": [{ "style": "knob" }],"init": 0.1,"min": 0,"max": 1,"step": 0.01}]},{"type": "vgroup","label": "config2","meta": [{ "1": "" }],"items": [ {"type": "hslider","label": "filt2Freq","shortname": "filt2Freq","address": "/strisy/config2/filt2Freq","index": 16608,"meta": [{ "style": "knob" }],"init": 3000,"min": 0,"max": 10000,"step": 1},{"type": "hslider","label": "filt2Level","shortname": "filt2Level","address": "/strisy/config2/filt2Level","index": 16604,"meta": [{ "style": "knob" }],"init": 0.8,"min": 0,"max": 50,"step": 0.01},{"type": "hslider","label": "filt2Q","shortname": "filt2Q","address": "/strisy/config2/filt2Q","index": 16612,"meta": [{ "style": "knob" }],"init": 2,"min": 0.01,"max": 10,"step": 0.01},{"type": "hslider","label": "filtFF","shortname": "filtFF","address": "/strisy/config2/filtFF","index": 16460,"meta": [{ "style": "knob" }],"init": 1,"min": 0,"max": 16,"step": 0.01},{"type": "hslider","label": "filtQ","shortname": "filtQ","address": "/strisy/config2/filtQ","index": 16584,"meta": [{ "style": "knob" }],"init": 1,"min": 0,"max": 10,"step": 0.01},{"type": "hslider","label": "minFreq","shortname": "minFreq","address": "/strisy/config2/minFreq","index": 16456,"meta": [{ "style": "knob" }],"init": 200,"min": 0,"max": 1000,"step": 1}]},{"type": "vgroup","label": "config3","meta": [{ "2": "" }],"items": [ {"type": "hslider","label": "bfQ1","shortname": "bfQ1","address": "/strisy/config3/bfQ1","index": 16640,"meta": [{ "style": "knob" }],"init": 5,"min": 0.3,"max": 20,"step": 0.01},{"type": "hslider","label": "bfQ2","shortname": "bfQ2","address": "/strisy/config3/bfQ2","index": 16668,"meta": [{ "style": "knob" }],"init": 8,"min": 0.3,"max": 20,"step": 0.01},{"type": "hslider","label": "bfQ3","shortname": "bfQ3","address": "/strisy/config3/bfQ3","index": 16696,"meta": [{ "style": "knob" }],"init": 8,"min": 0.3,"max": 20,"step": 0.01},{"type": "hslider","label": "bflevel","shortname": "bflevel","address": "/strisy/config3/bflevel","index": 16632,"meta": [{ "style": "knob" }],"init": 6,"min": 0.1,"max": 20,"step": 0.01}]},{"type": "vgroup","label": "accelerometer","items": [ {"type": "vslider","label": "acc_abs","shortname": "acc_abs","address": "/strisy/accelerometer/acc_abs","index": 16512,"meta": [{ "style": "knob" }],"init": 1,"min": 0,"max": 4,"step": 0.01}]},{"type": "vgroup","label": "gyroscope","items": [ {"type": "vslider","label": "rot_x","shortname": "rot_x","address": "/strisy/gyroscope/rot_x","index": 16664,"meta": [{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01},{"type": "vslider","label": "rot_y","shortname": "rot_y","address": "/strisy/gyroscope/rot_y","index": 16636,"meta": [{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01},{"type": "vslider","label": "rot_z","shortname": "rot_z","address": "/strisy/gyroscope/rot_z","index": 16692,"meta": [{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01}]},{"type": "vgroup","label": "v0","items": [ {"type": "vslider","label": "note","shortname": "v0_note","address": "/strisy/v0/note","index": 16404,"meta": [{ "0": "" },{ "style": "knob" }],"init": 69,"min": 0,"max": 127,"step": 0.01},{"type": "vslider","label": "pres","shortname": "v0_pres","address": "/strisy/v0/pres","index": 16396,"meta": [{ "1": "" },{ "style": "knob" }],"init": 0,"min": 0,"max": 1,"step": 0.01},{"type": "vslider","label": "vpres","shortname": "v0_vpres","address": "/strisy/v0/vpres","index": 16416,"meta": [{ "2": "" },{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01},{"type": "vslider","label": "but_y","shortname": "v0_but_y","address": "/strisy/v0/but_y","index": 16468,"meta": [{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01}]},{"type": "vgroup","label": "v1","items": [ {"type": "vslider","label": "note","shortname": "v1_note","address": "/strisy/v1/note","index": 16724,"meta": [{ "0": "" },{ "style": "knob" }],"init": 69,"min": 0,"max": 127,"step": 0.01},{"type": "vslider","label": "pres","shortname": "v1_pres","address": "/strisy/v1/pres","index": 16720,"meta": [{ "1": "" },{ "style": "knob" }],"init": 0,"min": 0,"max": 1,"step": 0.01},{"type": "vslider","label": "vpres","shortname": "v1_vpres","address": "/strisy/v1/vpres","index": 16736,"meta": [{ "2": "" },{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01},{"type": "vslider","label": "but_y","shortname": "v1_but_y","address": "/strisy/v1/but_y","index": 16760,"meta": [{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01}]},{"type": "vgroup","label": "v2","items": [ {"type": "vslider","label": "note","shortname": "v2_note","address": "/strisy/v2/note","index": 16856,"meta": [{ "0": "" },{ "style": "knob" }],"init": 69,"min": 0,"max": 127,"step": 0.01},{"type": "vslider","label": "pres","shortname": "v2_pres","address": "/strisy/v2/pres","index": 16852,"meta": [{ "1": "" },{ "style": "knob" }],"init": 0,"min": 0,"max": 1,"step": 0.01},{"type": "vslider","label": "vpres","shortname": "v2_vpres","address": "/strisy/v2/vpres","index": 16868,"meta": [{ "2": "" },{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01},{"type": "vslider","label": "but_y","shortname": "v2_but_y","address": "/strisy/v2/but_y","index": 16892,"meta": [{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01}]},{"type": "vgroup","label": "v3","items": [ {"type": "vslider","label": "note","shortname": "v3_note","address": "/strisy/v3/note","index": 16988,"meta": [{ "0": "" },{ "style": "knob" }],"init": 69,"min": 0,"max": 127,"step": 0.01},{"type": "vslider","label": "pres","shortname": "v3_pres","address": "/strisy/v3/pres","index": 16984,"meta": [{ "1": "" },{ "style": "knob" }],"init": 0,"min": 0,"max": 1,"step": 0.01},{"type": "vslider","label": "vpres","shortname": "v3_vpres","address": "/strisy/v3/vpres","index": 17000,"meta": [{ "2": "" },{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01},{"type": "vslider","label": "but_y","shortname": "v3_but_y","address": "/strisy/v3/but_y","index": 17024,"meta": [{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01}]},{"type": "vgroup","label": "v4","items": [ {"type": "vslider","label": "note","shortname": "v4_note","address": "/strisy/v4/note","index": 17120,"meta": [{ "0": "" },{ "style": "knob" }],"init": 69,"min": 0,"max": 127,"step": 0.01},{"type": "vslider","label": "pres","shortname": "v4_pres","address": "/strisy/v4/pres","index": 17116,"meta": [{ "1": "" },{ "style": "knob" }],"init": 0,"min": 0,"max": 1,"step": 0.01},{"type": "vslider","label": "vpres","shortname": "v4_vpres","address": "/strisy/v4/vpres","index": 17132,"meta": [{ "2": "" },{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01},{"type": "vslider","label": "but_y","shortname": "v4_but_y","address": "/strisy/v4/but_y","index": 17156,"meta": [{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01}]},{"type": "vgroup","label": "v5","items": [ {"type": "vslider","label": "note","shortname": "v5_note","address": "/strisy/v5/note","index": 17252,"meta": [{ "0": "" },{ "style": "knob" }],"init": 69,"min": 0,"max": 127,"step": 0.01},{"type": "vslider","label": "pres","shortname": "v5_pres","address": "/strisy/v5/pres","index": 17248,"meta": [{ "1": "" },{ "style": "knob" }],"init": 0,"min": 0,"max": 1,"step": 0.01},{"type": "vslider","label": "vpres","shortname": "v5_vpres","address": "/strisy/v5/vpres","index": 17264,"meta": [{ "2": "" },{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01},{"type": "vslider","label": "but_y","shortname": "v5_but_y","address": "/strisy/v5/but_y","index": 17288,"meta": [{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01}]}]}]}';
+	return '{"name": "synth","filename": "synth.dsp","version": "2.40.12","compile_options": "-lang wasm -cn synth -es 1 -mcd 16 -single -ftz 2","include_pathnames": ["/usr/local/share/faust","/usr/local/share/faust","/usr/share/faust",".","/tmp/sessions/F34D6CF80F44DCC3F14E13C1B1A424E5824A97F6/web/wasmjs"],"size": 17424,"inputs": 0,"outputs": 1,"meta": [ { "compilation_options": "-single -scal -I libraries/ -I project/ -lang wasm" },{ "compile_options": "-lang wasm -cn synth -es 1 -mcd 16 -single -ftz 2" },{ "fast_lib_author": "Piers Titus van der Torren (pierstitus@toverlamp.org)" },{ "fast_lib_licence": "Apache-2.0" },{ "fast_lib_name": "Faust Fast Approximations Library" },{ "filename": "synth.dsp" },{ "filters_lib_lowpass0_highpass1": "Copyright (C) 2003-2019 by Julius O. Smith III <jos@ccrma.stanford.edu>" },{ "filters_lib_name": "Faust Filters Library" },{ "filters_lib_svf_author": "Oleg Nesterov" },{ "filters_lib_svf_copyright": "Copyright (C) 2020 Oleg Nesterov <oleg@redhat.com>" },{ "filters_lib_svf_license": "MIT-style STK-4.3 license" },{ "filters_lib_version": "0.3" },{ "library_path0": "/libraries/stdfaust.lib" },{ "library_path1": "/project/fast.lib" },{ "library_path2": "/libraries/maths.lib" },{ "library_path3": "/libraries/platform.lib" },{ "library_path4": "/libraries/filters.lib" },{ "library_path5": "/libraries/signals.lib" },{ "library_path6": "/libraries/routes.lib" },{ "maths_lib_author": "GRAME" },{ "maths_lib_copyright": "GRAME" },{ "maths_lib_license": "LGPL with exception" },{ "maths_lib_name": "Faust Math Library" },{ "maths_lib_version": "2.5" },{ "name": "synth" },{ "platform_lib_name": "Generic Platform Library" },{ "platform_lib_version": "0.2" },{ "routes_lib_name": "Faust Signal Routing Library" },{ "routes_lib_version": "0.2" },{ "signals_lib_name": "Faust Signal Routing Library" },{ "signals_lib_version": "0.1" }],"ui": [ {"type": "hgroup","label": "strisy","items": [ {"type": "vgroup","label": "config","meta": [{ "0": "" }],"items": [ {"type": "hslider","label": "accDecay","shortname": "accDecay","address": "/strisy/config/accDecay","index": 16500,"meta": [{ "style": "knob" }],"init": 0.1,"min": 0,"max": 1,"step": 0.01}]},{"type": "vgroup","label": "config2","meta": [{ "1": "" }],"items": [ {"type": "hslider","label": "filt2Freq","shortname": "filt2Freq","address": "/strisy/config2/filt2Freq","index": 16608,"meta": [{ "style": "knob" }],"init": 3000,"min": 0,"max": 10000,"step": 1},{"type": "hslider","label": "filt2Level","shortname": "filt2Level","address": "/strisy/config2/filt2Level","index": 16604,"meta": [{ "style": "knob" }],"init": 0.8,"min": 0,"max": 50,"step": 0.01},{"type": "hslider","label": "filt2Q","shortname": "filt2Q","address": "/strisy/config2/filt2Q","index": 16612,"meta": [{ "style": "knob" }],"init": 2,"min": 0.01,"max": 10,"step": 0.01},{"type": "hslider","label": "filtFF","shortname": "filtFF","address": "/strisy/config2/filtFF","index": 16460,"meta": [{ "style": "knob" }],"init": 1,"min": 0,"max": 16,"step": 0.01},{"type": "hslider","label": "filtQ","shortname": "filtQ","address": "/strisy/config2/filtQ","index": 16584,"meta": [{ "style": "knob" }],"init": 1,"min": 0,"max": 10,"step": 0.01},{"type": "hslider","label": "minFreq","shortname": "minFreq","address": "/strisy/config2/minFreq","index": 16456,"meta": [{ "style": "knob" }],"init": 200,"min": 0,"max": 1000,"step": 1}]},{"type": "vgroup","label": "config3","meta": [{ "2": "" }],"items": [ {"type": "hslider","label": "bfQ1","shortname": "bfQ1","address": "/strisy/config3/bfQ1","index": 16640,"meta": [{ "style": "knob" }],"init": 5,"min": 0.3,"max": 20,"step": 0.01},{"type": "hslider","label": "bfQ2","shortname": "bfQ2","address": "/strisy/config3/bfQ2","index": 16668,"meta": [{ "style": "knob" }],"init": 8,"min": 0.3,"max": 20,"step": 0.01},{"type": "hslider","label": "bfQ3","shortname": "bfQ3","address": "/strisy/config3/bfQ3","index": 16696,"meta": [{ "style": "knob" }],"init": 8,"min": 0.3,"max": 20,"step": 0.01},{"type": "hslider","label": "bflevel","shortname": "bflevel","address": "/strisy/config3/bflevel","index": 16632,"meta": [{ "style": "knob" }],"init": 6,"min": 0.1,"max": 20,"step": 0.01}]},{"type": "vgroup","label": "accelerometer","items": [ {"type": "vslider","label": "acc_abs","shortname": "acc_abs","address": "/strisy/accelerometer/acc_abs","index": 16512,"meta": [{ "style": "knob" }],"init": 1,"min": 0,"max": 4,"step": 0.01}]},{"type": "vgroup","label": "gyroscope","items": [ {"type": "vslider","label": "rot_x","shortname": "rot_x","address": "/strisy/gyroscope/rot_x","index": 16664,"meta": [{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01},{"type": "vslider","label": "rot_y","shortname": "rot_y","address": "/strisy/gyroscope/rot_y","index": 16636,"meta": [{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01},{"type": "vslider","label": "rot_z","shortname": "rot_z","address": "/strisy/gyroscope/rot_z","index": 16692,"meta": [{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01}]},{"type": "vgroup","label": "v0","items": [ {"type": "vslider","label": "note","shortname": "v0_note","address": "/strisy/v0/note","index": 16404,"meta": [{ "0": "" },{ "style": "knob" }],"init": 69,"min": 0,"max": 127,"step": 0.01},{"type": "vslider","label": "pres","shortname": "v0_pres","address": "/strisy/v0/pres","index": 16396,"meta": [{ "1": "" },{ "style": "knob" }],"init": 0,"min": 0,"max": 1,"step": 0.01},{"type": "vslider","label": "vpres","shortname": "v0_vpres","address": "/strisy/v0/vpres","index": 16416,"meta": [{ "2": "" },{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01},{"type": "vslider","label": "but_y","shortname": "v0_but_y","address": "/strisy/v0/but_y","index": 16468,"meta": [{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01}]},{"type": "vgroup","label": "v1","items": [ {"type": "vslider","label": "note","shortname": "v1_note","address": "/strisy/v1/note","index": 16724,"meta": [{ "0": "" },{ "style": "knob" }],"init": 69,"min": 0,"max": 127,"step": 0.01},{"type": "vslider","label": "pres","shortname": "v1_pres","address": "/strisy/v1/pres","index": 16720,"meta": [{ "1": "" },{ "style": "knob" }],"init": 0,"min": 0,"max": 1,"step": 0.01},{"type": "vslider","label": "vpres","shortname": "v1_vpres","address": "/strisy/v1/vpres","index": 16736,"meta": [{ "2": "" },{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01},{"type": "vslider","label": "but_y","shortname": "v1_but_y","address": "/strisy/v1/but_y","index": 16760,"meta": [{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01}]},{"type": "vgroup","label": "v2","items": [ {"type": "vslider","label": "note","shortname": "v2_note","address": "/strisy/v2/note","index": 16856,"meta": [{ "0": "" },{ "style": "knob" }],"init": 69,"min": 0,"max": 127,"step": 0.01},{"type": "vslider","label": "pres","shortname": "v2_pres","address": "/strisy/v2/pres","index": 16852,"meta": [{ "1": "" },{ "style": "knob" }],"init": 0,"min": 0,"max": 1,"step": 0.01},{"type": "vslider","label": "vpres","shortname": "v2_vpres","address": "/strisy/v2/vpres","index": 16868,"meta": [{ "2": "" },{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01},{"type": "vslider","label": "but_y","shortname": "v2_but_y","address": "/strisy/v2/but_y","index": 16892,"meta": [{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01}]},{"type": "vgroup","label": "v3","items": [ {"type": "vslider","label": "note","shortname": "v3_note","address": "/strisy/v3/note","index": 16988,"meta": [{ "0": "" },{ "style": "knob" }],"init": 69,"min": 0,"max": 127,"step": 0.01},{"type": "vslider","label": "pres","shortname": "v3_pres","address": "/strisy/v3/pres","index": 16984,"meta": [{ "1": "" },{ "style": "knob" }],"init": 0,"min": 0,"max": 1,"step": 0.01},{"type": "vslider","label": "vpres","shortname": "v3_vpres","address": "/strisy/v3/vpres","index": 17000,"meta": [{ "2": "" },{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01},{"type": "vslider","label": "but_y","shortname": "v3_but_y","address": "/strisy/v3/but_y","index": 17024,"meta": [{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01}]},{"type": "vgroup","label": "v4","items": [ {"type": "vslider","label": "note","shortname": "v4_note","address": "/strisy/v4/note","index": 17120,"meta": [{ "0": "" },{ "style": "knob" }],"init": 69,"min": 0,"max": 127,"step": 0.01},{"type": "vslider","label": "pres","shortname": "v4_pres","address": "/strisy/v4/pres","index": 17116,"meta": [{ "1": "" },{ "style": "knob" }],"init": 0,"min": 0,"max": 1,"step": 0.01},{"type": "vslider","label": "vpres","shortname": "v4_vpres","address": "/strisy/v4/vpres","index": 17132,"meta": [{ "2": "" },{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01},{"type": "vslider","label": "but_y","shortname": "v4_but_y","address": "/strisy/v4/but_y","index": 17156,"meta": [{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01}]},{"type": "vgroup","label": "v5","items": [ {"type": "vslider","label": "note","shortname": "v5_note","address": "/strisy/v5/note","index": 17252,"meta": [{ "0": "" },{ "style": "knob" }],"init": 69,"min": 0,"max": 127,"step": 0.01},{"type": "vslider","label": "pres","shortname": "v5_pres","address": "/strisy/v5/pres","index": 17248,"meta": [{ "1": "" },{ "style": "knob" }],"init": 0,"min": 0,"max": 1,"step": 0.01},{"type": "vslider","label": "vpres","shortname": "v5_vpres","address": "/strisy/v5/vpres","index": 17264,"meta": [{ "2": "" },{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01},{"type": "vslider","label": "but_y","shortname": "v5_but_y","address": "/strisy/v5/but_y","index": 17288,"meta": [{ "style": "knob" }],"init": 0,"min": -1,"max": 1,"step": 0.01}]}]}]}';
 }
-function getBase64Codesynth() { return "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cmtsZXQiXSwic2l6ZSI6IDE3NDI0LCJpbnB1dHMiOiAwLCJvdXRwdXRzIjogMSwibWV0YSI6IFsgeyAiY29tcGlsYXRpb25fb3B0aW9ucyI6ICItc2luZ2xlIC1zY2FsIC1JIGxpYnJhcmllcy8gLUkgcHJvamVjdC8gLWxhbmcgd2FzbSIgfSx7ICJjb21waWxlX29wdGlvbnMiOiAiLWxhbmcgd2FzbS1pYiAtY24gc3ludGggLWVzIDEgLW1jZCAxNiAtc2luZ2xlIC1mdHogMiIgfSx7ICJmYXN0X2xpYl9hdXRob3IiOiAiUGllcnMgVGl0dXMgdmFuIGRlciBUb3JyZW4gKHBpZXJzdGl0dXNAdG92ZXJsYW1wLm9yZykiIH0seyAiZmFzdF9saWJfbGljZW5jZSI6ICJBcGFjaGUtMi4wIiB9LHsgImZhc3RfbGliX25hbWUiOiAiRmF1c3QgRmFzdCBBcHByb3hpbWF0aW9ucyBMaWJyYXJ5IiB9LHsgImZpbGVuYW1lIjogInN5bnRoLmRzcCIgfSx7ICJmaWx0ZXJzX2xpYl9sb3dwYXNzMF9oaWdocGFzczEiOiAiQ29weXJpZ2h0IChDKSAyMDAzLTIwMTkgYnkgSnVsaXVzIE8uIFNtaXRoIElJSSA8am9zQGNjcm1hLnN0YW5mb3JkLmVkdT4iIH0seyAiZmlsdGVyc19saWJfbmFtZSI6ICJGYXVzdCBGaWx0ZXJzIExpYnJhcnkiIH0seyAiZmlsdGVyc19saWJfc3ZmX2F1dGhvciI6ICJPbGVnIE5lc3Rlcm92IiB9LHsgImZpbHRlcnNfbGliX3N2Zl9jb3B5cmlnaHQiOiAiQ29weXJpZ2h0IChDKSAyMDIwIE9sZWcgTmVzdGVyb3YgPG9sZWdAcmVkaGF0LmNvbT4iIH0seyAiZmlsdGVyc19saWJfc3ZmX2xpY2Vuc2UiOiAiTUlULXN0eWxlIFNUSy00LjMgbGljZW5zZSIgfSx7ICJmaWx0ZXJzX2xpYl92ZXJzaW9uIjogIjAuMyIgfSx7ICJsaWJyYXJ5X3BhdGgwIjogIi9saWJyYXJpZXMvc3RkZmF1c3QubGliIiB9LHsgImxpYnJhcnlfcGF0aDEiOiAiL3Byb2plY3QvZmFzdC5saWIiIH0seyAibGlicmFyeV9wYXRoMiI6ICIvbGlicmFyaWVzL21hdGhzLmxpYiIgfSx7ICJsaWJyYXJ5X3BhdGgzIjogIi9saWJyYXJpZXMvcGxhdGZvcm0ubGliIiB9LHsgImxpYnJhcnlfcGF0aDQiOiAiL2xpYnJhcmllcy9maWx0ZXJzLmxpYiIgfSx7ICJsaWJyYXJ5X3BhdGg1IjogIi9saWJyYXJpZXMvc2lnbmFscy5saWIiIH0seyAibGlicmFyeV9wYXRoNiI6ICIvbGlicmFyaWVzL3JvdXRlcy5saWIiIH0seyAibWF0aHNfbGliX2F1dGhvciI6ICJHUkFNRSIgfSx7ICJtYXRoc19saWJfY29weXJpZ2h0IjogIkdSQU1FIiB9LHsgIm1hdGhzX2xpYl9saWNlbnNlIjogIkxHUEwgd2l0aCBleGNlcHRpb24iIH0seyAibWF0aHNfbGliX25hbWUiOiAiRmF1c3QgTWF0aCBMaWJyYXJ5IiB9LHsgIm1hdGhzX2xpYl92ZXJzaW9uIjogIjIuNSIgfSx7ICJuYW1lIjogInN5bnRoIiB9LHsgInBsYXRmb3JtX2xpYl9uYW1lIjogIkdlbmVyaWMgUGxhdGZvcm0gTGlicmFyeSIgfSx7ICJwbGF0Zm9ybV9saWJfdmVyc2lvbiI6ICIwLjIiIH0seyAicm91dGVzX2xpYl9uYW1lIjogIkZhdXN0IFNpZ25hbCBSb3V0aW5nIExpYnJhcnkiIH0seyAicm91dGVzX2xpYl92ZXJzaW9uIjogIjAuMiIgfSx7ICJzaWduYWxzX2xpYl9uYW1lIjogIkZhdXN0IFNpZ25hbCBSb3V0aW5nIExpYnJhcnkiIH0seyAic2lnbmFsc19saWJfdmVyc2lvbiI6ICIwLjEiIH1dLCJ1aSI6IFsgeyJ0eXBlIjogImhncm91cCIsImxhYmVsIjogInN0cmlzeSIsIml0ZW1zIjogWyB7InR5cGUiOiAidmdyb3VwIiwibGFiZWwiOiAiY29uZmlnIiwibWV0YSI6IFt7ICIwIjogIiIgfV0sIml0ZW1zIjogWyB7InR5cGUiOiAiaHNsaWRlciIsImxhYmVsIjogImFjY0RlY2F5Iiwic2hvcnRuYW1lIjogImFjY0RlY2F5IiwiYWRkcmVzcyI6ICIvc3RyaXN5L2NvbmZpZy9hY2NEZWNheSIsImluZGV4IjogMTY1MDAsIm1ldGEiOiBbeyAic3R5bGUiOiAia25vYiIgfV0sImluaXQiOiAwLjEsIm1pbiI6IDAsIm1heCI6IDEsInN0ZXAiOiAwLjAxfV19LHsidHlwZSI6ICJ2Z3JvdXAiLCJsYWJlbCI6ICJjb25maWcyIiwibWV0YSI6IFt7ICIxIjogIiIgfV0sIml0ZW1zIjogWyB7InR5cGUiOiAiaHNsaWRlciIsImxhYmVsIjogImZpbHQyRnJlcSIsInNob3J0bmFtZSI6ICJmaWx0MkZyZXEiLCJhZGRyZXNzIjogIi9zdHJpc3kvY29uZmlnMi9maWx0MkZyZXEiLCJpbmRleCI6IDE2NjA4LCJtZXRhIjogW3sgInN0eWxlIjogImtub2IiIH1dLCJpbml0IjogMzAwMCwibWluIjogMCwibWF4IjogMTAwMDAsInN0ZXAiOiAxfSx7InR5cGUiOiAiaHNsaWRlciIsImxhYmVsIjogImZpbHQyTGV2ZWwiLCJzaG9ydG5hbWUiOiAiZmlsdDJMZXZlbCIsImFkZHJlc3MiOiAiL3N0cmlzeS9jb25maWcyL2ZpbHQyTGV2ZWwiLCJpbmRleCI6IDE2NjA0LCJtZXRhIjogW3sgInN0eWxlIjogImtub2IiIH1dLCJpbml0IjogMC44LCJtaW4iOiAwLCJtYXgiOiA1MCwic3RlcCI6IDAuMDF9LHsidHlwZSI6ICJoc2xpZGVyIiwibGFiZWwiOiAiZmlsdDJRIiwic2hvcnRuYW1lIjogImZpbHQyUSIsImFkZHJlc3MiOiAiL3N0cmlzeS9jb25maWcyL2ZpbHQyUSIsImluZGV4IjogMTY2MTIsIm1ldGEiOiBbeyAic3R5bGUiOiAia25vYiIgfV0sImluaXQiOiAyLCJtaW4iOiAwLjAxLCJtYXgiOiAxMCwic3RlcCI6IDAuMDF9LHsidHlwZSI6ICJoc2xpZGVyIiwibGFiZWwiOiAiZmlsdEZGIiwic2hvcnRuYW1lIjogImZpbHRGRiIsImFkZHJlc3MiOiAiL3N0cmlzeS9jb25maWcyL2ZpbHRGRiIsImluZGV4IjogMTY0NjAsIm1ldGEiOiBbeyAic3R5bGUiOiAia25vYiIgfV0sImluaXQiOiAxLCJtaW4iOiAwLCJtYXgiOiAxNiwic3RlcCI6IDAuMDF9LHsidHlwZSI6ICJoc2xpZGVyIiwibGFiZWwiOiAiZmlsdFEiLCJzaG9ydG5hbWUiOiAiZmlsdFEiLCJhZGRyZXNzIjogIi9zdHJpc3kvY29uZmlnMi9maWx0USIsImluZGV4IjogMTY1ODQsIm1ldGEiOiBbeyAic3R5bGUiOiAia25vYiIgfV0sImluaXQiOiAxLCJtaW4iOiAwLCJtYXgiOiAxMCwic3RlcCI6IDAuMDF9LHsidHlwZSI6ICJoc2xpZGVyIiwibGFiZWwiOiAibWluRnJlcSIsInNob3J0bmFtZSI6ICJtaW5GcmVxIiwiYWRkcmVzcyI6ICIvc3RyaXN5L2NvbmZpZzIvbWluRnJlcSIsImluZGV4IjogMTY0NTYsIm1ldGEiOiBbeyAic3R5bGUiOiAia25vYiIgfV0sImluaXQiOiAyMDAsIm1pbiI6IDAsIm1heCI6IDEwMDAsInN0ZXAiOiAxfV19LHsidHlwZSI6ICJ2Z3JvdXAiLCJsYWJlbCI6ICJjb25maWczIiwibWV0YSI6IFt7ICIyIjogIiIgfV0sIml0ZW1zIjogWyB7InR5cGUiOiAiaHNsaWRlciIsImxhYmVsIjogImJmUTEiLCJzaG9ydG5hbWUiOiAiYmZRMSIsImFkZHJlc3MiOiAiL3N0cmlzeS9jb25maWczL2JmUTEiLCJpbmRleCI6IDE2NjQwLCJtZXRhIjogW3sgInN0eWxlIjogImtub2IiIH1dLCJpbml0IjogNSwibWluIjogMC4zLCJtYXgiOiAyMCwic3RlcCI6IDAuMDF9LHsidHlwZSI6ICJoc2xpZGVyIiwibGFiZWwiOiAiYmZRMiIsInNob3J0bmFtZSI6ICJiZlEyIiwiYWRkcmVzcyI6ICIvc3RyaXN5L2NvbmZpZzMvYmZRMiIsImluZGV4IjogMTY2NjgsIm1ldGEiOiBbeyAic3R5bGUiOiAia25vYiIgfV0sImluaXQiOiA4LCJtaW4iOiAwLjMsIm1heCI6IDIwLCJzdGVwIjogMC4wMX0seyJ0eXBlIjogImhzbGlkZXIiLCJsYWJlbCI6ICJiZlEzIiwic2hvcnRuYW1lIjogImJmUTMiLCJhZGRyZXNzIjogIi9zdHJpc3kvY29uZmlnMy9iZlEzIiwiaW5kZXgiOiAxNjY5NiwibWV0YSI6IFt7ICJzdHlsZSI6ICJrbm9iIiB9XSwiaW5pdCI6IDgsIm1pbiI6IDAuMywibWF4IjogMjAsInN0ZXAiOiAwLjAxfSx7InR5cGUiOiAiaHNsaWRlciIsImxhYmVsIjogImJmbGV2ZWwiLCJzaG9ydG5hbWUiOiAiYmZsZXZlbCIsImFkZHJlc3MiOiAiL3N0cmlzeS9jb25maWczL2JmbGV2ZWwiLCJpbmRleCI6IDE2NjMyLCJtZXRhIjogW3sgInN0eWxlIjogImtub2IiIH1dLCJpbml0IjogNiwibWluIjogMC4xLCJtYXgiOiAyMCwic3RlcCI6IDAuMDF9XX0seyJ0eXBlIjogInZncm91cCIsImxhYmVsIjogImFjY2VsZXJvbWV0ZXIiLCJpdGVtcyI6IFsgeyJ0eXBlIjogInZzbGlkZXIiLCJsYWJlbCI6ICJhY2NfYWJzIiwic2hvcnRuYW1lIjogImFjY19hYnMiLCJhZGRyZXNzIjogIi9zdHJpc3kvYWNjZWxlcm9tZXRlci9hY2NfYWJzIiwiaW5kZXgiOiAxNjUxMiwibWV0YSI6IFt7ICJzdHlsZSI6ICJrbm9iIiB9XSwiaW5pdCI6IDEsIm1pbiI6IDAsIm1heCI6IDQsInN0ZXAiOiAwLjAxfV19LHsidHlwZSI6ICJ2Z3JvdXAiLCJsYWJlbCI6ICJneXJvc2NvcGUiLCJpdGVtcyI6IFsgeyJ0eXBlIjogInZzbGlkZXIiLCJsYWJlbCI6ICJyb3RfeCIsInNob3J0bmFtZSI6ICJyb3RfeCIsImFkZHJlc3MiOiAiL3N0cmlzeS9neXJvc2NvcGUvcm90X3giLCJpbmRleCI6IDE2NjY0LCJtZXRhIjogW3sgInN0eWxlIjogImtub2IiIH1dLCJpbml0IjogMCwibWluIjogLTEsIm1heCI6IDEsInN0ZXAiOiAwLjAxfSx7InR5cGUiOiAidnNsaWRlciIsImxhYmVsIjogInJvdF95Iiwic2hvcnRuYW1lIjogInJvdF95IiwiYWRkcmVzcyI6ICIvc3RyaXN5L2d5cm9zY29wZS9yb3RfeSIsImluZGV4IjogMTY2MzYsIm1ldGEiOiBbeyAic3R5bGUiOiAia25vYiIgfV0sImluaXQiOiAwLCJtaW4iOiAtMSwibWF4IjogMSwic3RlcCI6IDAuMDF9LHsidHlwZSI6ICJ2c2xpZGVyIiwibGFiZWwiOiAicm90X3oiLCJzaG9ydG5hbWUiOiAicm90X3oiLCJhZGRyZXNzIjogIi9zdHJpc3kvZ3lyb3Njb3BlL3JvdF96IiwiaW5kZXgiOiAxNjY5MiwibWV0YSI6IFt7ICJzdHlsZSI6ICJrbm9iIiB9XSwiaW5pdCI6IDAsIm1pbiI6IC0xLCJtYXgiOiAxLCJzdGVwIjogMC4wMX1dfSx7InR5cGUiOiAidmdyb3VwIiwibGFiZWwiOiAidjAiLCJpdGVtcyI6IFsgeyJ0eXBlIjogInZzbGlkZXIiLCJsYWJlbCI6ICJub3RlIiwic2hvcnRuYW1lIjogInYwX25vdGUiLCJhZGRyZXNzIjogIi9zdHJpc3kvdjAvbm90ZSIsImluZGV4IjogMTY0MDQsIm1ldGEiOiBbeyAiMCI6ICIiIH0seyAic3R5bGUiOiAia25vYiIgfV0sImluaXQiOiA2OSwibWluIjogMCwibWF4IjogMTI3LCJzdGVwIjogMC4wMX0seyJ0eXBlIjogInZzbGlkZXIiLCJsYWJlbCI6ICJwcmVzIiwic2hvcnRuYW1lIjogInYwX3ByZXMiLCJhZGRyZXNzIjogIi9zdHJpc3kvdjAvcHJlcyIsImluZGV4IjogMTYzOTYsIm1ldGEiOiBbeyAiMSI6ICIiIH0seyAic3R5bGUiOiAia25vYiIgfV0sImluaXQiOiAwLCJtaW4iOiAwLCJtYXgiOiAxLCJzdGVwIjogMC4wMX0seyJ0eXBlIjogInZzbGlkZXIiLCJsYWJlbCI6ICJ2cHJlcyIsInNob3J0bmFtZSI6ICJ2MF92cHJlcyIsImFkZHJlc3MiOiAiL3N0cmlzeS92MC92cHJlcyIsImluZGV4IjogMTY0MTYsIm1ldGEiOiBbeyAiMiI6ICIiIH0seyAic3R5bGUiOiAia25vYiIgfV0sImluaXQiOiAwLCJtaW4iOiAtMSwibWF4IjogMSwic3RlcCI6IDAuMDF9LHsidHlwZSI6ICJ2c2xpZGVyIiwibGFiZWwiOiAiYnV0X3kiLCJzaG9ydG5hbWUiOiAidjBfYnV0X3kiLCJhZGRyZXNzIjogIi9zdHJpc3kvdjAvYnV0X3kiLCJpbmRleCI6IDE2NDY4LCJtZXRhIjogW3sgInN0eWxlIjogImtub2IiIH1dLCJpbml0IjogMCwibWluIjogLTEsIm1heCI6IDEsInN0ZXAiOiAwLjAxfV19LHsidHlwZSI6ICJ2Z3JvdXAiLCJsYWJlbCI6ICJ2MSIsIml0ZW1zIjogWyB7InR5cGUiOiAidnNsaWRlciIsImxhYmVsIjogIm5vdGUiLCJzaG9ydG5hbWUiOiAidjFfbm90ZSIsImFkZHJlc3MiOiAiL3N0cmlzeS92MS9ub3RlIiwiaW5kZXgiOiAxNjcyNCwibWV0YSI6IFt7ICIwIjogIiIgfSx7ICJzdHlsZSI6ICJrbm9iIiB9XSwiaW5pdCI6IDY5LCJtaW4iOiAwLCJtYXgiOiAxMjcsInN0ZXAiOiAwLjAxfSx7InR5cGUiOiAidnNsaWRlciIsImxhYmVsIjogInByZXMiLCJzaG9ydG5hbWUiOiAidjFfcHJlcyIsImFkZHJlc3MiOiAiL3N0cmlzeS92MS9wcmVzIiwiaW5kZXgiOiAxNjcyMCwibWV0YSI6IFt7ICIxIjogIiIgfSx7ICJzdHlsZSI6ICJrbm9iIiB9XSwiaW5pdCI6IDAsIm1pbiI6IDAsIm1heCI6IDEsInN0ZXAiOiAwLjAxfSx7InR5cGUiOiAidnNsaWRlciIsImxhYmVsIjogInZwcmVzIiwic2hvcnRuYW1lIjogInYxX3ZwcmVzIiwiYWRkcmVzcyI6ICIvc3RyaXN5L3YxL3ZwcmVzIiwiaW5kZXgiOiAxNjczNiwibWV0YSI6IFt7ICIyIjogIiIgfSx7ICJzdHlsZSI6ICJrbm9iIiB9XSwiaW5pdCI6IDAsIm1pbiI6IC0xLCJtYXgiOiAxLCJzdGVwIjogMC4wMX0seyJ0eXBlIjogInZzbGlkZXIiLCJsYWJlbCI6ICJidXRfeSIsInNob3J0bmFtZSI6ICJ2MV9idXRfeSIsImFkZHJlc3MiOiAiL3N0cmlzeS92MS9idXRfeSIsImluZGV4IjogMTY3NjAsIm1ldGEiOiBbeyAic3R5bGUiOiAia25vYiIgfV0sImluaXQiOiAwLCJtaW4iOiAtMSwibWF4IjogMSwic3RlcCI6IDAuMDF9XX0seyJ0eXBlIjogInZncm91cCIsImxhYmVsIjogInYyIiwiaXRlbXMiOiBbIHsidHlwZSI6ICJ2c2xpZGVyIiwibGFiZWwiOiAibm90ZSIsInNob3J0bmFtZSI6ICJ2Ml9ub3RlIiwiYWRkcmVzcyI6ICIvc3RyaXN5L3YyL25vdGUiLCJpbmRleCI6IDE2ODU2LCJtZXRhIjogW3sgIjAiOiAiIiB9LHsgInN0eWxlIjogImtub2IiIH1dLCJpbml0IjogNjksIm1pbiI6IDAsIm1heCI6IDEyNywic3RlcCI6IDAuMDF9LHsidHlwZSI6ICJ2c2xpZGVyIiwibGFiZWwiOiAicHJlcyIsInNob3J0bmFtZSI6ICJ2Ml9wcmVzIiwiYWRkcmVzcyI6ICIvc3RyaXN5L3YyL3ByZXMiLCJpbmRleCI6IDE2ODUyLCJtZXRhIjogW3sgIjEiOiAiIiB9LHsgInN0eWxlIjogImtub2IiIH1dLCJpbml0IjogMCwibWluIjogMCwibWF4IjogMSwic3RlcCI6IDAuMDF9LHsidHlwZSI6ICJ2c2xpZGVyIiwibGFiZWwiOiAidnByZXMiLCJzaG9ydG5hbWUiOiAidjJfdnByZXMiLCJhZGRyZXNzIjogIi9zdHJpc3kvdjIvdnByZXMiLCJpbmRleCI6IDE2ODY4LCJtZXRhIjogW3sgIjIiOiAiIiB9LHsgInN0eWxlIjogImtub2IiIH1dLCJpbml0IjogMCwibWluIjogLTEsIm1heCI6IDEsInN0ZXAiOiAwLjAxfSx7InR5cGUiOiAidnNsaWRlciIsImxhYmVsIjogImJ1dF95Iiwic2hvcnRuYW1lIjogInYyX2J1dF95IiwiYWRkcmVzcyI6ICIvc3RyaXN5L3YyL2J1dF95IiwiaW5kZXgiOiAxNjg5MiwibWV0YSI6IFt7ICJzdHlsZSI6ICJrbm9iIiB9XSwiaW5pdCI6IDAsIm1pbiI6IC0xLCJtYXgiOiAxLCJzdGVwIjogMC4wMX1dfSx7InR5cGUiOiAidmdyb3VwIiwibGFiZWwiOiAidjMiLCJpdGVtcyI6IFsgeyJ0eXBlIjogInZzbGlkZXIiLCJsYWJlbCI6ICJub3RlIiwic2hvcnRuYW1lIjogInYzX25vdGUiLCJhZGRyZXNzIjogIi9zdHJpc3kvdjMvbm90ZSIsImluZGV4IjogMTY5ODgsIm1ldGEiOiBbeyAiMCI6ICIiIH0seyAic3R5bGUiOiAia25vYiIgfV0sImluaXQiOiA2OSwibWluIjogMCwibWF4IjogMTI3LCJzdGVwIjogMC4wMX0seyJ0eXBlIjogInZzbGlkZXIiLCJsYWJlbCI6ICJwcmVzIiwic2hvcnRuYW1lIjogInYzX3ByZXMiLCJhZGRyZXNzIjogIi9zdHJpc3kvdjMvcHJlcyIsImluZGV4IjogMTY5ODQsIm1ldGEiOiBbeyAiMSI6ICIiIH0seyAic3R5bGUiOiAia25vYiIgfV0sImluaXQiOiAwLCJtaW4iOiAwLCJtYXgiOiAxLCJzdGVwIjogMC4wMX0seyJ0eXBlIjogInZzbGlkZXIiLCJsYWJlbCI6ICJ2cHJlcyIsInNob3J0bmFtZSI6ICJ2M192cHJlcyIsImFkZHJlc3MiOiAiL3N0cmlzeS92My92cHJlcyIsImluZGV4IjogMTcwMDAsIm1ldGEiOiBbeyAiMiI6ICIiIH0seyAic3R5bGUiOiAia25vYiIgfV0sImluaXQiOiAwLCJtaW4iOiAtMSwibWF4IjogMSwic3RlcCI6IDAuMDF9LHsidHlwZSI6ICJ2c2xpZGVyIiwibGFiZWwiOiAiYnV0X3kiLCJzaG9ydG5hbWUiOiAidjNfYnV0X3kiLCJhZGRyZXNzIjogIi9zdHJpc3kvdjMvYnV0X3kiLCJpbmRleCI6IDE3MDI0LCJtZXRhIjogW3sgInN0eWxlIjogImtub2IiIH1dLCJpbml0IjogMCwibWluIjogLTEsIm1heCI6IDEsInN0ZXAiOiAwLjAxfV19LHsidHlwZSI6ICJ2Z3JvdXAiLCJsYWJlbCI6ICJ2NCIsIml0ZW1zIjogWyB7InR5cGUiOiAidnNsaWRlciIsImxhYmVsIjogIm5vdGUiLCJzaG9ydG5hbWUiOiAidjRfbm90ZSIsImFkZHJlc3MiOiAiL3N0cmlzeS92NC9ub3RlIiwiaW5kZXgiOiAxNzEyMCwibWV0YSI6IFt7ICIwIjogIiIgfSx7ICJzdHlsZSI6ICJrbm9iIiB9XSwiaW5pdCI6IDY5LCJtaW4iOiAwLCJtYXgiOiAxMjcsInN0ZXAiOiAwLjAxfSx7InR5cGUiOiAidnNsaWRlciIsImxhYmVsIjogInByZXMiLCJzaG9ydG5hbWUiOiAidjRfcHJlcyIsImFkZHJlc3MiOiAiL3N0cmlzeS92NC9wcmVzIiwiaW5kZXgiOiAxNzExNiwibWV0YSI6IFt7ICIxIjogIiIgfSx7ICJzdHlsZSI6ICJrbm9iIiB9XSwiaW5pdCI6IDAsIm1pbiI6IDAsIm1heCI6IDEsInN0ZXAiOiAwLjAxfSx7InR5cGUiOiAidnNsaWRlciIsImxhYmVsIjogInZwcmVzIiwic2hvcnRuYW1lIjogInY0X3ZwcmVzIiwiYWRkcmVzcyI6ICIvc3RyaXN5L3Y0L3ZwcmVzIiwiaW5kZXgiOiAxNzEzMiwibWV0YSI6IFt7ICIyIjogIiIgfSx7ICJzdHlsZSI6ICJrbm9iIiB9XSwiaW5pdCI6IDAsIm1pbiI6IC0xLCJtYXgiOiAxLCJzdGVwIjogMC4wMX0seyJ0eXBlIjogInZzbGlkZXIiLCJsYWJlbCI6ICJidXRfeSIsInNob3J0bmFtZSI6ICJ2NF9idXRfeSIsImFkZHJlc3MiOiAiL3N0cmlzeS92NC9idXRfeSIsImluZGV4IjogMTcxNTYsIm1ldGEiOiBbeyAic3R5bGUiOiAia25vYiIgfV0sImluaXQiOiAwLCJtaW4iOiAtMSwibWF4IjogMSwic3RlcCI6IDAuMDF9XX0seyJ0eXBlIjogInZncm91cCIsImxhYmVsIjogInY1IiwiaXRlbXMiOiBbIHsidHlwZSI6ICJ2c2xpZGVyIiwibGFiZWwiOiAibm90ZSIsInNob3J0bmFtZSI6ICJ2NV9ub3RlIiwiYWRkcmVzcyI6ICIvc3RyaXN5L3Y1L25vdGUiLCJpbmRleCI6IDE3MjUyLCJtZXRhIjogW3sgIjAiOiAiIiB9LHsgInN0eWxlIjogImtub2IiIH1dLCJpbml0IjogNjksIm1pbiI6IDAsIm1heCI6IDEyNywic3RlcCI6IDAuMDF9LHsidHlwZSI6ICJ2c2xpZGVyIiwibGFiZWwiOiAicHJlcyIsInNob3J0bmFtZSI6ICJ2NV9wcmVzIiwiYWRkcmVzcyI6ICIvc3RyaXN5L3Y1L3ByZXMiLCJpbmRleCI6IDE3MjQ4LCJtZXRhIjogW3sgIjEiOiAiIiB9LHsgInN0eWxlIjogImtub2IiIH1dLCJpbml0IjogMCwibWluIjogMCwibWF4IjogMSwic3RlcCI6IDAuMDF9LHsidHlwZSI6ICJ2c2xpZGVyIiwibGFiZWwiOiAidnByZXMiLCJzaG9ydG5hbWUiOiAidjVfdnByZXMiLCJhZGRyZXNzIjogIi9zdHJpc3kvdjUvdnByZXMiLCJpbmRleCI6IDE3MjY0LCJtZXRhIjogW3sgIjIiOiAiIiB9LHsgInN0eWxlIjogImtub2IiIH1dLCJpbml0IjogMCwibWluIjogLTEsIm1heCI6IDEsInN0ZXAiOiAwLjAxfSx7InR5cGUiOiAidnNsaWRlciIsImxhYmVsIjogImJ1dF95Iiwic2hvcnRuYW1lIjogInY1X2J1dF95IiwiYWRkcmVzcyI6ICIvc3RyaXN5L3Y1L2J1dF95IiwiaW5kZXgiOiAxNzI4OCwibWV0YSI6IFt7ICJzdHlsZSI6ICJrbm9iIiB9XSwiaW5pdCI6IDAsIm1pbiI6IC0xLCJtYXgiOiAxLCJzdGVwIjogMC4wMX1dfV19XX0="; }
-
 /*
- faust2wasm: GRAME 2017-2019
+ faust2webaudio
+
+ Primarily written by Myles Borins
+ During the Spring 2013 offering of Music 420b with Julius Smith
+ A bit during the Summer of 2013 with the help of Joshua Kit Clayton
+ And finally a sprint during the late fall of 2013 to get everything working
+ A Special thanks to Yann Orlarey and Stéphane Letz
+
+ faust2webaudio is distributed under the terms the MIT or GPL2 Licenses.
+ Choose the license that best suits your project. The text of the MIT and GPL
+ licenses are at the root directory.
+
+ Additional code: GRAME 2014-2019
 */
 
 'use strict';
 
-if (typeof (AudioWorkletNode) === "undefined") {
-    alert("AudioWorklet is not supported in this browser !")
-}
-
-class synthNode extends AudioWorkletNode {
-
-    constructor(context, baseURL, options) {
-        super(context, 'synth', options);
-
-        this.baseURL = baseURL;
-        this.json = options.processorOptions.json;
-        this.json_object = JSON.parse(this.json);
-
-        // JSON parsing functions
-        this.parse_ui = function (ui, obj) {
-            for (var i = 0; i < ui.length; i++) {
-                this.parse_group(ui[i], obj);
-            }
-        }
-
-        this.parse_group = function (group, obj) {
-            if (group.items) {
-                this.parse_items(group.items, obj);
-            }
-        }
-
-        this.parse_items = function (items, obj) {
-            for (var i = 0; i < items.length; i++) {
-                this.parse_item(items[i], obj);
-            }
-        }
-
-        this.parse_item = function (item, obj) {
-            if (item.type === "vgroup"
-                || item.type === "hgroup"
-                || item.type === "tgroup") {
-                this.parse_items(item.items, obj);
-            } else if (item.type === "hbargraph"
-                || item.type === "vbargraph") {
-                // Keep bargraph adresses
-                obj.outputs_items.push(item.address);
-            } else if (item.type === "vslider"
-                || item.type === "hslider"
-                || item.type === "button"
-                || item.type === "checkbox"
-                || item.type === "nentry") {
-                // Keep inputs adresses
-                obj.inputs_items.push(item.address);
-                obj.descriptor.push(item);
-                // Decode MIDI
-                if (item.meta !== undefined) {
-                    for (var i = 0; i < item.meta.length; i++) {
-                        if (item.meta[i].midi !== undefined) {
-                            if (item.meta[i].midi.trim() === "pitchwheel") {
-                                obj.fPitchwheelLabel.push({
-                                    path: item.address,
-                                    min: parseFloat(item.min),
-                                    max: parseFloat(item.max)
-                                });
-                            } else if (item.meta[i].midi.trim().split(" ")[0] === "ctrl") {
-                                obj.fCtrlLabel[parseInt(item.meta[i].midi.trim().split(" ")[1])]
-                                    .push({
-                                        path: item.address,
-                                        min: parseFloat(item.min),
-                                        max: parseFloat(item.max)
-                                    });
-                            }
-                        }
-                    }
-                }
-                // Define setXXX/getXXX, replacing '/c' with 'C' everywhere in the string
-                var set_name = "set" + item.address;
-                var get_name = "get" + item.address;
-                set_name = set_name.replace(/\/./g, (x) => { return x.substr(1, 1).toUpperCase(); });
-                get_name = get_name.replace(/\/./g, (x) => { return x.substr(1, 1).toUpperCase(); });
-                obj[set_name] = (val) => { obj.setParamValue(item.address, val); };
-                obj[get_name] = () => { return obj.getParamValue(item.address); };
-                //console.log(set_name);
-                //console.log(get_name);
-            }
-        }
-
-        this.output_handler = null;
-
-        // input/output items
-        this.inputs_items = [];
-        this.outputs_items = [];
-        this.descriptor = [];
-
-        // MIDI
-        this.fPitchwheelLabel = [];
-        this.fCtrlLabel = new Array(128);
-        for (var i = 0; i < this.fCtrlLabel.length; i++) { this.fCtrlLabel[i] = []; }
-
-        // Parse UI
-        this.parse_ui(this.json_object.ui, this);
-
-        // Set message handler
-        this.port.onmessage = this.handleMessage.bind(this);
-        try {
-            if (this.parameters) this.parameters.forEach(p => p.automationRate = "k-rate");
-        } catch (e) { }
-    }
-
-    // To be called by the message port with messages coming from the processor
-    handleMessage(event) {
-        var msg = event.data;
-        if (this.output_handler) {
-            this.output_handler(msg.path, msg.value);
-        }
-    }
-
-    // Public API
+/**
+ * @class FaustWasm2ScriptProcessor
+ * @property {string} name - name of current DSP
+ * @property {any[]} _log - event log
+ * @property {string[]} node - ScriptProcessorNode
+ * @property {boolean} debug - debug mode
+ */
+class FaustWasm2ScriptProcessor {
 
     /**
-     * Destroy the node, deallocate resources.
+     * Creates an instance of FaustWasm2ScriptProcessor.
+     * @param {string} dspName - dsp name
+     * @param {{ debug: boolean, [key: string]: any }} options - compile options
      */
-    destroy() {
-        this.port.postMessage({ type: "destroy" });
-        this.port.close();
-    }
-
-    /**
-     *  Returns a full JSON description of the DSP.
-     */
-    getJSON() {
-        return this.json;
-    }
-
-    // For WAP
-    async getMetadata() {
-        return new Promise(resolve => {
-            let real_url = (this.baseURL === "") ? "main.json" : (this.baseURL + "/main.json");
-            fetch(real_url).then(responseJSON => {
-                return responseJSON.json();
-            }).then(json => {
-                resolve(json);
-            })
-        });
-    }
-
-    /**
-     *  Set the control value at a given path.
-     *
-     * @param path - a path to the control
-     * @param val - the value to be set
-     */
-    setParamValue(path, val) {
-        // Needed for sample accurate control
-        this.parameters.get(path).setValueAtTime(val, 0);
-    }
-
-    // For WAP
-    setParam(path, val) {
-        // Needed for sample accurate control
-        this.parameters.get(path).setValueAtTime(val, 0);
-    }
-
-    /**
-     *  Get the control value at a given path.
-     *
-     * @return the current control value
-     */
-    getParamValue(path) {
-        return this.parameters.get(path).value;
-    }
-
-    // For WAP
-    getParam(path) {
-        return this.parameters.get(path).value;
-    }
-
-    /**
-     * Setup a control output handler with a function of type (path, value)
-     * to be used on each generated output value. This handler will be called
-     * each audio cycle at the end of the 'compute' method.
-     *
-     * @param handler - a function of type function(path, value)
-     */
-    setOutputParamHandler(handler) {
-        this.output_handler = handler;
-    }
-
-    /**
-     * Get the current output handler.
-     */
-    getOutputParamHandler() {
-        return this.output_handler;
-    }
-
-    getNumInputs() {
-        return parseInt(this.json_object.inputs);
-    }
-
-    getNumOutputs() {
-        return parseInt(this.json_object.outputs);
-    }
-
-    // For WAP
-    inputChannelCount() {
-        return parseInt(this.json_object.inputs);
-    }
-
-    outputChannelCount() {
-        return parseInt(this.json_object.outputs);
-    }
-
-    /**
-     * Returns an array of all input paths (to be used with setParamValue/getParamValue)
-     */
-    getParams() {
-        return this.inputs_items;
-    }
-
-    // For WAP
-    getDescriptor() {
-        var desc = {};
-        for (const item in this.descriptor) {
-            if (this.descriptor.hasOwnProperty(item)) {
-                if (this.descriptor[item].label != "bypass") {
-                    desc = Object.assign({ [this.descriptor[item].label]: { minValue: this.descriptor[item].min, maxValue: this.descriptor[item].max, defaultValue: this.descriptor[item].init } }, desc);
-                }
-            }
-        }
-        return desc;
-    }
-
-    /**
-     * Control change
-     *
-     * @param channel - the MIDI channel (0..15, not used for now)
-     * @param ctrl - the MIDI controller number (0..127)
-     * @param value - the MIDI controller value (0..127)
-     */
-    ctrlChange(channel, ctrl, value) {
-        if (this.fCtrlLabel[ctrl] !== []) {
-            for (var i = 0; i < this.fCtrlLabel[ctrl].length; i++) {
-                var path = this.fCtrlLabel[ctrl][i].path;
-                this.setParamValue(path, synthNode.remap(value, 0, 127, this.fCtrlLabel[ctrl][i].min, this.fCtrlLabel[ctrl][i].max));
-                if (this.output_handler) {
-                    this.output_handler(path, this.getParamValue(path));
-                }
-            }
-        }
-    }
-
-    /**
-     * PitchWeel
-     *
-     * @param channel - the MIDI channel (0..15, not used for now)
-     * @param value - the MIDI controller value (0..16383)
-     */
-    pitchWheel(channel, wheel) {
-        for (var i = 0; i < this.fPitchwheelLabel.length; i++) {
-            var pw = this.fPitchwheelLabel[i];
-            this.setParamValue(pw.path, synthNode.remap(wheel, 0, 16383, pw.min, pw.max));
-            if (this.output_handler) {
-                this.output_handler(pw.path, this.getParamValue(pw.path));
-            }
-        }
-    }
-
-    /**
-     * Generic MIDI message handler.
-     */
-    midiMessage(data) {
-        var cmd = data[0] >> 4;
-        var channel = data[0] & 0xf;
-        var data1 = data[1];
-        var data2 = data[2];
-
-        if (channel === 9) {
-            return;
-        } else if (cmd === 11) {
-            this.ctrlChange(channel, data1, data2);
-        } else if (cmd === 14) {
-            this.pitchWheel(channel, (data2 * 128.0 + data1));
-        }
-    }
-
-    // For WAP
-    onMidi(data) {
-        midiMessage(data);
-    }
-
-    /**
-     * @returns {Object} describes the path for each available param and its current value
-     */
-    async getState() {
-        var params = new Object();
-        for (let i = 0; i < this.getParams().length; i++) {
-            Object.assign(params, { [this.getParams()[i]]: `${this.getParam(this.getParams()[i])}` });
-        }
-        return new Promise(resolve => { resolve(params) });
-    }
-
-    /**
-     * Sets each params with the value indicated in the state object
-     * @param {Object} state 
-     */
-    async setState(state) {
-        return new Promise(resolve => {
-            for (const param in state) {
-                if (state.hasOwnProperty(param)) this.setParam(param, state[param]);
-            }
-            try {
-                this.gui.setAttribute('state', JSON.stringify(state));
-            } catch (error) {
-                console.warn("Plugin without gui or GUI not defined", error);
-            }
-            resolve(state);
-        })
-    }
-
-    /**
-     * A different call closer to the preset management
-     * @param {Object} patch to assign as a preset to the node
-     */
-    setPatch(patch) {
-        this.setState(this.presets[patch])
-    }
-
-    static remap(v, mn0, mx0, mn1, mx1) {
-        return (1.0 * (v - mn0) / (mx0 - mn0)) * (mx1 - mn1) + mn1;
-    }
-
-}
-
-// Factory class
-class synth {
-
-    static fWorkletProcessors;
-
-    /**
-     * Factory constructor.
-     *
-     * @param context - the audio context
-     * @param baseURL - the baseURL of the plugin folder
-     */
-    constructor(context, baseURL = "") {
-        console.log("baseLatency " + context.baseLatency);
-        console.log("outputLatency " + context.outputLatency);
-        console.log("sampleRate " + context.sampleRate);
-
-        this.context = context;
-        this.baseURL = baseURL;
-        this.pathTable = [];
-
-        this.fWorkletProcessors = this.fWorkletProcessors || [];
+    constructor(dspName, options) {
+        this.name = dspName;
+        this._log = [];
+        this.debug = false || (typeof options === "object" && options.debug);
     }
 
     heap2Str(buf) {
@@ -376,512 +55,426 @@ class synth {
     }
 
     /**
-     * Load additionnal resources to prepare the custom AudioWorkletNode. Returns a promise to be used with the created node.
-     */
-    async load() {
+    * Constructor of Monophonic Faust DSP
+    *
+    * @param {WebAssembly.Instance} dspInstance - the wasm instance
+    * @param {AudioContext | webkitAudioContext} audioCtx - the Web Audio context
+    * @param {number} bufferSize - the buffer_size in frames
+    *
+    * @returns {ScriptProcessorNode} a valid WebAudio ScriptProcessorNode object or null
+    */
+    getNode(dspInstance, audioCtx, bufferSize) {
+
+        // JSON is as offset 0
+        var HEAPU8 = new Uint8Array(dspInstance.exports.memory.buffer);
+        this.json = this.heap2Str(HEAPU8);
+        this.json_object = JSON.parse(this.json);
+
+        let sp;
+        const inputs = parseInt(this.json_object.inputs);
+        const outputs = parseInt(this.json_object.outputs);
         try {
-            const importObject = {
-                env: {
-                    memoryBase: 0,
-                    tableBase: 0,
-                    _abs: Math.abs,
-
-                    // Float version
-                    _acosf: Math.acos,
-                    _asinf: Math.asin,
-                    _atanf: Math.atan,
-                    _atan2f: Math.atan2,
-                    _ceilf: Math.ceil,
-                    _cosf: Math.cos,
-                    _expf: Math.exp,
-                    _floorf: Math.floor,
-                    _fmodf: (x, y) => x % y,
-                    _logf: Math.log,
-                    _log10f: Math.log10,
-                    _max_f: Math.max,
-                    _min_f: Math.min,
-                    _remainderf: (x, y) => x - Math.round(x / y) * y,
-                    _powf: Math.pow,
-                    _roundf: Math.fround,
-                    _sinf: Math.sin,
-                    _sqrtf: Math.sqrt,
-                    _tanf: Math.tan,
-                    _acoshf: Math.acosh,
-                    _asinhf: Math.asinh,
-                    _atanhf: Math.atanh,
-                    _coshf: Math.cosh,
-                    _sinhf: Math.sinh,
-                    _tanhf: Math.tanh,
-                    _isnanf: Number.isNaN,
-                    _isinff: function (x) { return !isFinite(x); },
-                    _copysignf: function (x, y) { return Math.sign(x) === Math.sign(y) ? x : -x; },
-
-                    // Double version
-                    _acos: Math.acos,
-                    _asin: Math.asin,
-                    _atan: Math.atan,
-                    _atan2: Math.atan2,
-                    _ceil: Math.ceil,
-                    _cos: Math.cos,
-                    _exp: Math.exp,
-                    _floor: Math.floor,
-                    _fmod: (x, y) => x % y,
-                    _log: Math.log,
-                    _log10: Math.log10,
-                    _max_: Math.max,
-                    _min_: Math.min,
-                    _remainder: (x, y) => x - Math.round(x / y) * y,
-                    _pow: Math.pow,
-                    _round: Math.fround,
-                    _sin: Math.sin,
-                    _sqrt: Math.sqrt,
-                    _tan: Math.tan,
-                    _acosh: Math.acosh,
-                    _asinh: Math.asinh,
-                    _atanh: Math.atanh,
-                    _cosh: Math.cosh,
-                    _sinh: Math.sinh,
-                    _tanh: Math.tanh,
-                    _isnan: Number.isNaN,
-                    _isinf: function (x) { return !isFinite(x); },
-                    _copysign: function (x, y) { return Math.sign(x) === Math.sign(y) ? x : -x; },
-
-                    table: new WebAssembly.Table({ initial: 0, element: "anyfunc" })
-                }
-            };
-
-            let real_url = (this.baseURL === "") ? "synth.wasm" : (this.baseURL + "/synth.wasm");
-            const dspFile = await fetch(real_url);
-            const dspBuffer = await dspFile.arrayBuffer();
-            const dspModule = await WebAssembly.compile(dspBuffer);
-            const dspInstance = await WebAssembly.instantiate(dspModule, importObject);
-
-            let HEAPU8 = new Uint8Array(dspInstance.exports.memory.buffer);
-            let json = this.heap2Str(HEAPU8);
-            let json_object = JSON.parse(json);
-            let options = { wasm_module: dspModule, json: json };
-
-            if (this.fWorkletProcessors.indexOf(name) === -1) {
-                try {
-                    let re = /JSON_STR/g;
-                    let synthProcessorString1 = synthProcessorString.replace(re, json);
-                    let real_url = window.URL.createObjectURL(new Blob([synthProcessorString1], { type: 'text/javascript' }));
-                    await this.context.audioWorklet.addModule(real_url);
-                    // Keep the DSP name
-                    console.log("Keep the DSP name");
-                    this.fWorkletProcessors.push(name);
-                } catch (e) {
-                    console.error(e);
-                    console.error("Faust " + this.name + " cannot be loaded or compiled");
-                    return null;
-                }
-            }
-            this.node = new synthNode(this.context, this.baseURL,
-                {
-                    numberOfInputs: (parseInt(json_object.inputs) > 0) ? 1 : 0,
-                    numberOfOutputs: (parseInt(json_object.outputs) > 0) ? 1 : 0,
-                    channelCount: Math.max(1, parseInt(json_object.inputs)),
-                    outputChannelCount: [parseInt(json_object.outputs)],
-                    channelCountMode: "explicit",
-                    channelInterpretation: "speakers",
-                    processorOptions: options
-                });
-            this.node.onprocessorerror = () => { console.log('An error from synth-processor was detected.'); }
-            return (this.node);
+            sp = audioCtx.createScriptProcessor(bufferSize, inputs, outputs);
         } catch (e) {
-            console.error(e);
-            console.error("Faust " + this.name + " cannot be loaded or compiled");
+            this.error("Error in createScriptProcessor: " + e);
             return null;
         }
-    }
 
-    async loadGui() {
-        return new Promise((resolve, reject) => {
+        sp.output_handler = null;
+        sp.ins = null;
+        sp.outs = null;
+        sp.compute_handler = null;
+
+        sp.dspInChannnels = [];
+        sp.dspOutChannnels = [];
+
+        sp.fPitchwheelLabel = [];
+        sp.fCtrlLabel = new Array(128).fill(null).map(() => []);
+
+        sp.remap = (v, mn0, mx0, mn1, mx1) => (v - mn0) / (mx0 - mn0) * (mx1 - mn1) + mn1;
+
+        sp.numIn = inputs;
+        sp.numOut = outputs;
+
+        this.log(sp.numIn);
+        this.log(sp.numOut);
+
+        // Memory allocator
+        sp.ptr_size = 4;
+        sp.sample_size = 4;
+
+        sp.factory = dspInstance.exports;
+        sp.HEAP = dspInstance.exports.memory.buffer;
+        sp.HEAP32 = new Int32Array(sp.HEAP);
+        sp.HEAPF32 = new Float32Array(sp.HEAP);
+
+        this.log(sp.HEAP);
+        this.log(sp.HEAP32);
+        this.log(sp.HEAPF32);
+
+        // bargraph
+        sp.outputs_timer = 5;
+        sp.outputs_items = [];
+
+        // input items
+        sp.inputs_items = [];
+
+        // Start of HEAP index
+
+        // DSP is placed first with index 0. Audio buffer start at the end of DSP.
+        sp.audio_heap_ptr = parseInt(this.json_object.size);
+
+        // Setup pointers offset
+        sp.audio_heap_ptr_inputs = sp.audio_heap_ptr;
+        sp.audio_heap_ptr_outputs = sp.audio_heap_ptr_inputs + sp.numIn * sp.ptr_size;
+
+        // Setup buffer offset
+        sp.audio_heap_inputs = sp.audio_heap_ptr_outputs + sp.numOut * sp.ptr_size;
+        sp.audio_heap_outputs = sp.audio_heap_inputs + sp.numIn * bufferSize * sp.sample_size;
+
+        // Start of DSP memory : DSP is placed first with index 0
+        sp.dsp = 0;
+
+        sp.pathTable = [];
+
+        sp.update_outputs = () => {
+            if (sp.outputs_items.length > 0 && sp.output_handler && sp.outputs_timer-- === 0) {
+                sp.outputs_timer = 5;
+                sp.outputs_items.forEach(item => sp.output_handler(item, sp.factory.getParamValue(sp.dsp, sp.pathTable[item])));
+            }
+        };
+
+        sp.compute = e => {
+            for (let i = 0; i < sp.numIn; i++) { // Read inputs
+                const input = e.inputBuffer.getChannelData(i);
+                const dspInput = sp.dspInChannnels[i];
+                dspInput.set(input);
+            }
+            // Possibly call an externally given callback (for instance to synchronize playing a MIDIFile...)
+            if (sp.compute_handler) sp.compute_handler(bufferSize);
             try {
-                // DO THIS ONLY ONCE. If another instance has already been added, do not add the html file again
-                let real_url = (this.baseURL === "") ? "main.html" : (this.baseURL + "/main.html");
-                if (!this.linkExists(real_url)) {
-                    // LINK DOES NOT EXIST, let's add it to the document
-                    var link = document.createElement('link');
-                    link.rel = 'import';
-                    link.href = real_url;
-                    document.head.appendChild(link);
-                    link.onload = (e) => {
-                        // the file has been loaded, instanciate GUI
-                        // and get back the HTML elem
-                        // HERE WE COULD REMOVE THE HARD CODED NAME
-                        var element = createsynthGUI(this.node);
-                        resolve(element);
-                    }
-                } else {
-                    // LINK EXIST, WE AT LEAST CREATED ONE INSTANCE PREVIOUSLY
-                    // so we can create another instance
-                    var element = createsynthGUI(this.node);
-                    resolve(element);
-                }
+                sp.factory.compute(sp.dsp, bufferSize, sp.ins, sp.outs); // Compute
             } catch (e) {
-                console.log(e);
-                reject(e);
-            }
-        });
-    };
-
-    linkExists(url) {
-        return document.querySelectorAll(`link[href="${url}"]`).length > 0;
-    }
-}
-
-// Template string for AudioWorkletProcessor
-
-let synthProcessorString = `
-
-    'use strict';
-
-    // Monophonic Faust DSP
-    class synthProcessor extends AudioWorkletProcessor {
-        
-        // JSON parsing functions
-        static parse_ui(ui, obj, callback)
-        {
-            for (var i = 0; i < ui.length; i++) {
-                synthProcessor.parse_group(ui[i], obj, callback);
-            }
-        }
-        
-        static parse_group(group, obj, callback)
-        {
-            if (group.items) {
-                synthProcessor.parse_items(group.items, obj, callback);
-            }
-        }
-        
-        static parse_items(items, obj, callback)
-        {
-            for (var i = 0; i < items.length; i++) {
-                callback(items[i], obj, callback);
-            }
-        }
-        
-        static parse_item1(item, obj, callback)
-        {
-            if (item.type === "vgroup"
-                || item.type === "hgroup"
-                || item.type === "tgroup") {
-                synthProcessor.parse_items(item.items, obj, callback);
-            } else if (item.type === "hbargraph"
-                       || item.type === "vbargraph") {
-                // Nothing
-            } else if (item.type === "vslider"
-                       || item.type === "hslider"
-                       || item.type === "button"
-                       || item.type === "checkbox"
-                       || item.type === "nentry") {
-                obj.push({ name: item.address,
-                         defaultValue: item.init,
-                         minValue: item.min,
-                         maxValue: item.max });
-            }
-        }
-        
-        static parse_item2(item, obj, callback)
-        {
-            if (item.type === "vgroup"
-                || item.type === "hgroup"
-                || item.type === "tgroup") {
-                synthProcessor.parse_items(item.items, obj, callback);
-            } else if (item.type === "hbargraph"
-                       || item.type === "vbargraph") {
-                // Keep bargraph adresses
-                obj.outputs_items.push(item.address);
-                obj.pathTable[item.address] = parseInt(item.index);
-            } else if (item.type === "vslider"
-                       || item.type === "hslider"
-                       || item.type === "button"
-                       || item.type === "checkbox"
-                       || item.type === "nentry") {
-                // Keep inputs adresses
-                obj.inputs_items.push(item.address);
-                obj.pathTable[item.address] = parseInt(item.index);
-            }
-        }
-     
-        static get parameterDescriptors() 
-        {
-            // Analyse JSON to generate AudioParam parameters
-            var params = [];
-            synthProcessor.parse_ui(JSON.parse(\`JSON_STR\`).ui, params, synthProcessor.parse_item1);
-            return params;
-        }
-       
-        constructor(options)
-        {
-            super(options);
-            this.running = true;
-            
-            const importObject = {
-                    env: {
-                        memoryBase: 0,
-                        tableBase: 0,
-
-                        // Integer version
-                        _abs: Math.abs,
-
-                        // Float version
-                        _acosf: Math.acos,
-                        _asinf: Math.asin,
-                        _atanf: Math.atan,
-                        _atan2f: Math.atan2,
-                        _ceilf: Math.ceil,
-                        _cosf: Math.cos,
-                        _expf: Math.exp,
-                        _floorf: Math.floor,
-                        _fmodf: function(x, y) { return x % y; },
-                        _logf: Math.log,
-                        _log10f: Math.log10,
-                        _max_f: Math.max,
-                        _min_f: Math.min,
-                        _remainderf: function(x, y) { return x - Math.round(x/y) * y; },
-                        _powf: Math.pow,
-                        _roundf: Math.fround,
-                        _sinf: Math.sin,
-                        _sqrtf: Math.sqrt,
-                        _tanf: Math.tan,
-                        _acoshf: Math.acosh,
-                        _asinhf: Math.asinh,
-                        _atanhf: Math.atanh,
-                        _coshf: Math.cosh,
-                        _sinhf: Math.sinh,
-                        _tanhf: Math.tanh,
-
-                        // Double version
-                        _acos: Math.acos,
-                        _asin: Math.asin,
-                        _atan: Math.atan,
-                        _atan2: Math.atan2,
-                        _ceil: Math.ceil,
-                        _cos: Math.cos,
-                        _exp: Math.exp,
-                        _floor: Math.floor,
-                        _fmod: function(x, y) { return x % y; },
-                        _log: Math.log,
-                        _log10: Math.log10,
-                        _max_: Math.max,
-                        _min_: Math.min,
-                        _remainder:function(x, y) { return x - Math.round(x/y) * y; },
-                        _pow: Math.pow,
-                        _round: Math.fround,
-                        _sin: Math.sin,
-                        _sqrt: Math.sqrt,
-                        _tan: Math.tan,
-                        _acosh: Math.acosh,
-                        _asinh: Math.asinh,
-                        _atanh: Math.atanh,
-                        _cosh: Math.cosh,
-                        _sinh: Math.sinh,
-                        _tanh: Math.tanh,
-
-                        table: new WebAssembly.Table({ initial: 0, element: 'anyfunc' })
-                    }
-            };
-            
-            this.synth_instance = new WebAssembly.Instance(options.processorOptions.wasm_module, importObject);
-            this.json_object = JSON.parse(options.processorOptions.json);
-         
-            this.output_handler = function(path, value) { this.port.postMessage({ path: path, value: value }); };
-            
-            this.ins = null;
-            this.outs = null;
-
-            this.dspInChannnels = [];
-            this.dspOutChannnels = [];
-
-            this.numIn = parseInt(this.json_object.inputs);
-            this.numOut = parseInt(this.json_object.outputs);
-
-            // Memory allocator
-            this.ptr_size = 4;
-            this.sample_size = 4;
-            this.integer_size = 4;
-            
-            this.factory = this.synth_instance.exports;
-            this.HEAP = this.synth_instance.exports.memory.buffer;
-            this.HEAP32 = new Int32Array(this.HEAP);
-            this.HEAPF32 = new Float32Array(this.HEAP);
-
-            // Warning: keeps a ref on HEAP in Chrome and prevent proper GC
-            //console.log(this.HEAP);
-            //console.log(this.HEAP32);
-            //console.log(this.HEAPF32);
-
-            // bargraph
-            this.outputs_timer = 5;
-            this.outputs_items = [];
-
-            // input items
-            this.inputs_items = [];
-        
-            // Start of HEAP index
-
-            // DSP is placed first with index 0. Audio buffer start at the end of DSP.
-            this.audio_heap_ptr = parseInt(this.json_object.size);
-
-            // Setup pointers offset
-            this.audio_heap_ptr_inputs = this.audio_heap_ptr;
-            this.audio_heap_ptr_outputs = this.audio_heap_ptr_inputs + (this.numIn * this.ptr_size);
-
-            // Setup buffer offset
-            this.audio_heap_inputs = this.audio_heap_ptr_outputs + (this.numOut * this.ptr_size);
-            this.audio_heap_outputs = this.audio_heap_inputs + (this.numIn * NUM_FRAMES * this.sample_size);
-            
-            // Start of DSP memory : DSP is placed first with index 0
-            this.dsp = 0;
-
-            this.pathTable = [];
-         
-            // Send output values to the AudioNode
-            this.update_outputs = function ()
-            {
-                if (this.outputs_items.length > 0 && this.output_handler && this.outputs_timer-- === 0) {
-                    this.outputs_timer = 5;
-                    for (var i = 0; i < this.outputs_items.length; i++) {
-                        this.output_handler(this.outputs_items[i], this.HEAPF32[this.pathTable[this.outputs_items[i]] >> 2]);
-                    }
-                }
-            }
-            
-            this.initAux = function ()
-            {
-                var i;
-                
-                if (this.numIn > 0) {
-                    this.ins = this.audio_heap_ptr_inputs;
-                    for (i = 0; i < this.numIn; i++) {
-                        this.HEAP32[(this.ins >> 2) + i] = this.audio_heap_inputs + ((NUM_FRAMES * this.sample_size) * i);
-                    }
-                    
-                    // Prepare Ins buffer tables
-                    var dspInChans = this.HEAP32.subarray(this.ins >> 2, (this.ins + this.numIn * this.ptr_size) >> 2);
-                    for (i = 0; i < this.numIn; i++) {
-                        this.dspInChannnels[i] = this.HEAPF32.subarray(dspInChans[i] >> 2, (dspInChans[i] + NUM_FRAMES * this.sample_size) >> 2);
-                    }
-                }
-                
-                if (this.numOut > 0) {
-                    this.outs = this.audio_heap_ptr_outputs;
-                    for (i = 0; i < this.numOut; i++) {
-                        this.HEAP32[(this.outs >> 2) + i] = this.audio_heap_outputs + ((NUM_FRAMES * this.sample_size) * i);
-                    }
-                    
-                    // Prepare Out buffer tables
-                    var dspOutChans = this.HEAP32.subarray(this.outs >> 2, (this.outs + this.numOut * this.ptr_size) >> 2);
-                    for (i = 0; i < this.numOut; i++) {
-                        this.dspOutChannnels[i] = this.HEAPF32.subarray(dspOutChans[i] >> 2, (dspOutChans[i] + NUM_FRAMES * this.sample_size) >> 2);
-                    }
-                }
-                
-                // Parse UI
-                synthProcessor.parse_ui(this.json_object.ui, this, synthProcessor.parse_item2);
-                
-                // Init DSP
-                this.factory.init(this.dsp, sampleRate); // 'sampleRate' is defined in AudioWorkletGlobalScope  
-            }
-
-            this.setParamValue = function (path, val)
-            {
-                this.HEAPF32[this.pathTable[path] >> 2] = val;
-            }
-
-            this.getParamValue = function (path)
-            {
-                return this.HEAPF32[this.pathTable[path] >> 2];
-            }
-
-            // Init resulting DSP
-            this.initAux();
-        }
-        
-        process(inputs, outputs, parameters) 
-        {
-            var input = inputs[0];
-            var output = outputs[0];
-            
-            // Check inputs
-            if (this.numIn > 0 && (!input || !input[0] || input[0].length === 0)) {
-                //console.log("Process input error");
-                return true;
-            }
-            // Check outputs
-            if (this.numOut > 0 && (!output || !output[0] || output[0].length === 0)) {
-                //console.log("Process output error");
-                return true;
-            }
-            
-            // Copy inputs
-            if (input !== undefined) {
-                for (var chan = 0; chan < Math.min(this.numIn, input.length); ++chan) {
-                    var dspInput = this.dspInChannnels[chan];
-                    dspInput.set(input[chan]);
-                }
-            }
-            
-            /*
-            TODO: sample accurate control change is not yet handled
-            When no automation occurs, params[i][1] has a length of 1,
-            otherwise params[i][1] has a length of NUM_FRAMES with possible control change each sample
-            */
-            
-            // Update controls
-            for (const path in parameters) {
-                const paramArray = parameters[path];
-                this.setParamValue(path, paramArray[0]);
-            }
-        
-          	// Compute
-            try {
-                this.factory.compute(this.dsp, NUM_FRAMES, this.ins, this.outs);
-            } catch(e) {
                 console.log("ERROR in compute (" + e + ")");
             }
-            
-            // Update bargraph
-            this.update_outputs();
-            
-            // Copy outputs
-            if (output !== undefined) {
-                for (var chan = 0; chan < Math.min(this.numOut, output.length); ++chan) {
-                    var dspOutput = this.dspOutChannnels[chan];
-                    output[chan].set(dspOutput);
+            sp.update_outputs(); // Update bargraph
+            for (let i = 0; i < sp.numOut; i++) { // Write outputs
+                const output = e.outputBuffer.getChannelData(i);
+                const dspOutput = sp.dspOutChannnels[i];
+                output.set(dspOutput);
+            }
+        };
+        // JSON parsing
+        sp.parse_ui = ui => ui.forEach(group => sp.parse_group(group));
+        sp.parse_group = group => group.items ? sp.parse_items(group.items) : null;
+        sp.parse_items = items => items.forEach(item => sp.parse_item(item));
+        sp.parse_item = item => {
+            if (item.type === "vgroup" || item.type === "hgroup" || item.type === "tgroup") {
+                sp.parse_items(item.items);
+            } else if (item.type === "hbargraph" || item.type === "vbargraph") {
+                // Keep bargraph adresses
+                sp.outputs_items.push(item.address);
+                sp.pathTable[item.address] = parseInt(item.index);
+            } else if (item.type === "vslider" || item.type === "hslider" || item.type === "button"
+                || item.type === "checkbox" || item.type === "nentry") {
+                // Keep inputs adresses
+                sp.inputs_items.push(item.address);
+                sp.pathTable[item.address] = parseInt(item.index);
+                if (!item.meta) return;
+                item.meta.forEach(meta => {
+                    const midi = meta.midi;
+                    if (!midi) return;
+                    const strMidi = midi.trim();
+                    if (strMidi === "pitchwheel") {
+                        sp.fPitchwheelLabel.push({
+                            path: item.address,
+                            min: parseFloat(item.min),
+                            max: parseFloat(item.max)
+                        });
+                    } else {
+                        const matched = strMidi.match(/^ctrl\s(\d+)/);
+                        if (!matched) return;
+                        sp.fCtrlLabel[parseInt(matched[1])].push({
+                            path: item.address,
+                            min: parseFloat(item.min),
+                            max: parseFloat(item.max)
+                        });
+                    }
+                })
+            }
+        }
+        sp.initAux = () => { // Setup web audio context
+            this.log("buffer_size " + bufferSize);
+            sp.onaudioprocess = sp.compute;
+            if (sp.numIn > 0) {
+                sp.ins = sp.audio_heap_ptr_inputs;
+                for (let i = 0; i < sp.numIn; i++) {
+                    sp.HEAP32[(sp.ins >> 2) + i] = sp.audio_heap_inputs + bufferSize * sp.sample_size * i;
+                }
+                // Prepare Ins buffer tables
+                const dspInChans = sp.HEAP32.subarray(sp.ins >> 2, (sp.ins + sp.numIn * sp.ptr_size) >> 2);
+                for (let i = 0; i < sp.numIn; i++) {
+                    sp.dspInChannnels[i] = sp.HEAPF32.subarray(dspInChans[i] >> 2, (dspInChans[i] + bufferSize * sp.sample_size) >> 2);
                 }
             }
-            
-            return this.running;
-    	}
-        
-        handleMessage(event)
-        {
-            var msg = event.data;
-            switch (msg.type) {
-                case "destroy": this.running = false; break;
+            if (sp.numOut > 0) {
+                sp.outs = sp.audio_heap_ptr_outputs;
+                for (let i = 0; i < sp.numOut; i++) {
+                    sp.HEAP32[(sp.outs >> 2) + i] = sp.audio_heap_outputs + bufferSize * sp.sample_size * i;
+                }
+                // Prepare Out buffer tables
+                const dspOutChans = sp.HEAP32.subarray(sp.outs >> 2, (sp.outs + sp.numOut * sp.ptr_size) >> 2);
+                for (let i = 0; i < sp.numOut; i++) {
+                    sp.dspOutChannnels[i] = sp.HEAPF32.subarray(dspOutChans[i] >> 2, (dspOutChans[i] + bufferSize * sp.sample_size) >> 2);
+                }
             }
+            // Parse JSON UI part
+            sp.parse_ui(this.json_object.ui);
+            // Init DSP
+            sp.factory.init(sp.dsp, audioCtx.sampleRate);
+        }
+
+        // Public API
+
+        /**
+         * Destroy the node, deallocate resources.
+         */
+        sp.destroy = () => { }
+
+        sp.getSampleRate = () => audioCtx.sampleRate;   // Return current sample rate
+        sp.getNumInputs = () => sp.numIn;               // Return instance number of audio inputs.
+        sp.getNumOutputs = () => sp.numOut;             // Return instance number of audio outputs.    
+
+        /**
+        * Global init, doing the following initialization:
+        * - static tables initialization
+        * - call 'instanceInit': constants and instance state initialisation
+        *
+        * @param {number} sampleRate - the sampling rate in Hertz
+        */
+        sp.init = sampleRate => sp.factory.init(sp.dsp, sampleRate);
+
+        /**
+        * Init instance state.
+        *
+        * @param {number} sampleRate - the sampling rate in Hertz
+        */
+        sp.instanceInit = sampleRate => sp.factory.instanceInit(sp.dsp, sampleRate);
+
+        /**
+        * Init instance constant state.
+        *
+        * @param {number} sampleRate - the sampling rate in Hertz
+        */
+        sp.instanceConstants = sampleRate => sp.factory.instanceConstants(sp.dsp, sampleRate);
+
+        /* Init default control parameters values. */
+        sp.instanceResetUserInterface = () => sp.factory.instanceResetUserInterface(sp.dsp);
+
+        /* Init instance state (delay lines...).*/
+        sp.instanceClear = () => sp.factory.instanceClear(sp.dsp);
+
+        /**
+         * Trigger the Meta handler with instance specific calls to 'declare' (key, value) metadata.
+         *
+         * @param {{ declare: (string, any) => any }} handler - the Meta handler as a 'declare' function of type (key, value)
+         */
+        sp.metadata = handler => {
+            if (this.json_object.meta) {
+                this.json_object.meta.forEach(meta => handler.declare(Object.keys(meta)[0], Object.values(meta)[0]));
+            }
+        }
+
+        /**
+         * Setup a control output handler with a function of type (path, value)
+         * to be used on each generated output value. This handler will be called
+         * each audio cycle at the end of the 'compute' method.
+         *
+         * @param {{ declare: (string, any) => any }} handler - a function of type function(path, value)
+         */
+        sp.setOutputParamHandler = handler => sp.output_handler = handler;
+
+        /**
+         * Get the current output handler.
+         */
+        sp.getOutputParamHandler = () => sp.output_handler;
+
+        /**
+         * Control change
+         *
+         * @param {number} channel - the MIDI channel (0..15, not used for now)
+         * @param {number} ctrl - the MIDI controller number (0..127)
+         * @param {number} value - the MIDI controller value (0..127)
+         */
+        sp.ctrlChange = (channel, ctrl, value) => {
+            if (!sp.fCtrlLabel[ctrl].length) return;
+            sp.fCtrlLabel[ctrl].forEach(ctrl => {
+                const path = ctrl.path;
+                sp.setParamValue(path, sp.remap(value, 0, 127, ctrl.min, ctrl.max));
+                if (sp.output_handler) sp.output_handler(path, sp.getParamValue(path));
+            })
+        }
+
+        /**
+         * PitchWeel
+         *
+         * @param {number} channel - the MIDI channel (0..15, not used for now)
+         * @param {number} value - the MIDI controller value (0..16383)
+         */
+        sp.pitchWheel = (channel, wheel) => {
+            sp.fPitchwheelLabel.forEach(pw => {
+                sp.setParamValue(pw.path, sp.remap(wheel, 0, 16383, pw.min, pw.max));
+                if (sp.output_handler) sp.output_handler(pw.path, sp.getParamValue(pw.path));
+            });
+        }
+
+        /**
+         * Set control value.
+         *
+         * @param {string} path - the path to the wanted control (retrieved using 'getParams' method)
+         * @param {number} val - the float value for the wanted parameter
+         */
+
+        sp.setParamValue = (path, val) => sp.factory.setParamValue(sp.dsp, sp.pathTable[path], val);
+        /**
+         * Get control value.
+         *
+         * @param {string} path - the path to the wanted control (retrieved using 'getParams' method)
+         *
+         * @return {number} the float value
+         */
+        sp.getParamValue = path => sp.factory.getParamValue(sp.dsp, sp.pathTable[path]);
+
+        /**
+         * Get the table of all input parameters paths.
+         *
+         * @return {object} the table of all input parameter paths.
+         */
+        sp.getParams = () => sp.inputs_items;
+
+        /**
+         * Get DSP JSON description with its UI and metadata.
+         *
+         * @return {string} DSP JSON description
+         */
+        sp.getJSON = () => this.json;
+
+        // Init resulting DSP
+        sp.initAux();
+        return sp;
+    }
+
+    /**
+    * Create a ScriptProcessorNode Web Audio object
+    * by loading and compiling the Faust wasm file
+    *
+    * @param {AudioContext | webkitAudioContext} audioCtx - the Web Audio context
+    * @param {number} bufferSize - the bufferSize in frames
+    * @returns {Promise<ScriptProcessorNode>} a Promise for valid WebAudio ScriptProcessorNode object or null
+    */
+    async createDSP(audioCtx, bufferSize) {
+        const importObject = {
+            env: {
+                memoryBase: 0,
+                tableBase: 0,
+                _abs: Math.abs,
+
+                // Float version
+                _acosf: Math.acos,
+                _asinf: Math.asin,
+                _atanf: Math.atan,
+                _atan2f: Math.atan2,
+                _ceilf: Math.ceil,
+                _cosf: Math.cos,
+                _expf: Math.exp,
+                _floorf: Math.floor,
+                _fmodf: (x, y) => x % y,
+                _logf: Math.log,
+                _log10f: Math.log10,
+                _max_f: Math.max,
+                _min_f: Math.min,
+                _remainderf: (x, y) => x - Math.round(x / y) * y,
+                _powf: Math.pow,
+                _roundf: Math.fround,
+                _sinf: Math.sin,
+                _sqrtf: Math.sqrt,
+                _tanf: Math.tan,
+                _acoshf: Math.acosh,
+                _asinhf: Math.asinh,
+                _atanhf: Math.atanh,
+                _coshf: Math.cosh,
+                _sinhf: Math.sinh,
+                _tanhf: Math.tanh,
+                _isnanf: Number.isNaN,
+                _isinff: function (x) { return !isFinite(x); },
+                _copysignf: function (x, y) { return Math.sign(x) === Math.sign(y) ? x : -x; },
+
+                // Double version
+                _acos: Math.acos,
+                _asin: Math.asin,
+                _atan: Math.atan,
+                _atan2: Math.atan2,
+                _ceil: Math.ceil,
+                _cos: Math.cos,
+                _exp: Math.exp,
+                _floor: Math.floor,
+                _fmod: (x, y) => x % y,
+                _log: Math.log,
+                _log10: Math.log10,
+                _max_: Math.max,
+                _min_: Math.min,
+                _remainder: (x, y) => x - Math.round(x / y) * y,
+                _pow: Math.pow,
+                _round: Math.fround,
+                _sin: Math.sin,
+                _sqrt: Math.sqrt,
+                _tan: Math.tan,
+                _acosh: Math.acosh,
+                _asinh: Math.asinh,
+                _atanh: Math.atanh,
+                _cosh: Math.cosh,
+                _sinh: Math.sinh,
+                _tanh: Math.tanh,
+                _isnan: Number.isNaN,
+                _isinf: function (x) { return !isFinite(x); },
+                _copysign: function (x, y) { return Math.sign(x) === Math.sign(y) ? x : -x; },
+
+                table: new WebAssembly.Table({ initial: 0, element: "anyfunc" })
+            }
+        };
+
+        try {
+            const dspFile = await fetch(this.name + ".wasm");
+            const dspBuffer = await dspFile.arrayBuffer();
+            const dspModule = await WebAssembly.instantiate(dspBuffer, importObject);
+            return this.getNode(dspModule.instance, audioCtx, bufferSize);
+        } catch (e) {
+            this.error(e);
+            this.error("Faust " + this.name + " cannot be loaded or compiled");
         }
     }
 
-    // Globals
-    const NUM_FRAMES = 128;
-    try {
-        registerProcessor('synth', synthProcessor);
-    } catch (error) {
-        console.warn(error);
+    log(str) {
+        this._log.push(str);
+        if (this.debug) console.log(str);
     }
-`;
+
+    error(str) {
+        this._log.push(str);
+        console.error(str);
+    }
+}
 
 const dspName = "synth";
+const instance = new FaustWasm2ScriptProcessor(dspName);
 
-// WAP factory or npm package module
+// output to window or npm package module
 if (typeof module === "undefined") {
-    window.synth = synth;
-    window.Faustsynth = synth;
-    window[dspName] = synth;
+    window[dspName] = instance;
 } else {
-    module.exports = { synth };
+    const exp = {};
+    exp[dspName] = instance;
+    module.exports = exp;
 }
+
+// Usage : synth.createDSP(audioCtx, 1024).then(dsp => dsp.connect(audioCtx.destination));
