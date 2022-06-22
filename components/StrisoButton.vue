@@ -4,7 +4,7 @@
         @mousemove="move" @touchmove="move"
         @mouseleave="up" @mouseup="up" @mouseout="up"
         @touchend="up" @touchleave="up" @touchcancel="up"
-        :class="{ button: true, black: config.black, hidden: !config.note }"
+        :class="{ button: true, [config.color]: true }"
         :style="buttonStyle">
             <!-- {{config.note}} -->
             <div class="dot" :style="dotStyle" v-show="isPressed">&nbsp;</div>
@@ -41,6 +41,8 @@
 }
 </style>
 <script>
+import { start } from "tone";
+import events from "../utils/events";
 const clamp = (min, val, max) => Math.max(min, Math.min(val, max));
 const scale = (val, scale) => val/scale;
 
@@ -52,6 +54,14 @@ export default {
         size: {
             type: Number,
             default: Math.min(window.innerHeight, window.innerHeight) / 11,
+        },
+        input: {
+            type: String,
+            default: "striso-input"
+        },
+        output: {
+            type: String,
+            default: "striso-output"
         }
     },
     data() {
@@ -60,6 +70,12 @@ export default {
             dpos: [0,0],
             isPressed: false
         }
+    },
+    created() {
+        events.on(this.input, this.onInput);
+    },
+    destroyed() {
+        events.off(this.input, this.onInput);
     },
     computed: {
         buttonStyle() {
@@ -76,30 +92,44 @@ export default {
         }
     },
     methods: {
-        up(){
-            this.isPressed = false;
-            this.$emit("noteOff", {
-                tilt: 0,
-                bend: 0,
-                velocity: 0
-            });
-            this.dpos = [0, 0];
-        },
-        down(e){
-            this.isPressed = true;
-            if(!isNaN(e.clientX)) {
-                this.initialpos = [ e.clientX, e.clientY ];
-            } else {   
-                this.initialpos = [ e.targetTouches[0].clientX, e.targetTouches[0].clientY ];
+        onInput(event) {
+            if(event.note === this.config.note) {
+                // to do
             }
-            this.$emit("noteOn", {
-                tilt: 0,
-                bend: 0,
-                velocity: 1.0
-            });
+        },
+        up(){
+            if(this.isPressed === true) {
+                this.isPressed = false;
+                events.emit(this.output, {
+                    message: "noteOff",
+                    note: this.config.note,
+                    tilt: 0,
+                    bend: 0,
+                    velocity: 0
+                });
+                this.dpos = [0, 0];
+            }
+        },
+       async down(e){
+            if(this.isPressed === false) {
+                await start();
+                this.isPressed = true;
+                if(!isNaN(e.clientX)) {
+                    this.initialpos = [ e.clientX, e.clientY ];
+                } else {   
+                    this.initialpos = [ e.targetTouches[0].clientX, e.targetTouches[0].clientY ];
+                }
+                events.emit(this.output, {
+                    message: "noteOn",
+                    note: this.config.note,
+                    tilt: 0,
+                    bend: 0,
+                    velocity: 1.0
+                });
+            }
         },
         move(e) {
-            if(this.isPressed) {
+            if(this.isPressed === true) {
                 let x = 0, y = 0;
                 if(!isNaN(e.clientX)) {
                     x = e.clientX;
@@ -113,9 +143,9 @@ export default {
                     this.up(e);
                     return;
                 }
-                this.$emit("move", {
-                    // tilt: Math.min(this.size * 0.5, this.dpos[1] / (this.size * 0.5)), //y
-                    // bend: Math.min(this.size * 0.5, this.dpos[0] / (this.size * 0.5)), //x,
+                events.emit(this.output, {
+                   message: "move",
+                   note: this.config.note,
                    tilt: clamp(-1, scale(this.dpos[1], this.size * 0.5), 1),
                    bend: clamp(-1, scale(this.dpos[0], this.size * 0.5), 1),
                    velocity: 1.0 // not supported

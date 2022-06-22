@@ -33,7 +33,7 @@ const createOctave = (currentOctave = START_OCTAVE, startOctave = START_OCTAVE) 
             octave: currentOctave,
             x: x * dx,
             y: (48 - (OCTAVE_LAYOUT[noteLetter] + (currentOctave - startOctave) * 12)) * dy,
-            black: noteLetter.length > 1
+            color: noteLetter.length > 1 ? "black" : "white"
         }
     });
 }
@@ -47,4 +47,4 @@ export const createDCompose = (octave = START_OCTAVE) => {
     ].flat();
 }
 
-export default createDCompose(START_OCTAVE);
+export default createDCompose;

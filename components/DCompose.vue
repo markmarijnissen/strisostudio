@@ -1,44 +1,55 @@
 <template>
-  <div class="striso-board" :style="`--size: ${size}px; height: ${size * 11}px;`">
+  <div class="dcompose-layout" :style="`--size: ${size}px; height: ${size * 11}px;`">
     <StrisoButton :config="btn" v-for="(btn,i) in buttons" 
       :key="i" 
       :size="size"
-      @noteOn="$event => noteOn(btn, $event)"
-      @noteOff="$event => noteOff(btn, $event)"
-      @move="$event => move(btn, $event)"
+      :input="input"
+      :output="output"
       @wheel.passive="disableZoom"
       />
   </div>
 </template>
 <style scoped>
-.striso-board {
+.dcompose-layout {
   position: relative;
   user-select: none;
-  width: 100%;
-  /* border-radius: 3%;git */
-  background-color: beige;
-  border: 1px solid #747457;
 }
-
 </style>
 <script>
-import dcompose from "../utils/dcompose";
-import synth from "../utils/striso-synth";
+import dcomposeLayout from "../utils/dcompose";
 
+// disable right-click when there is a dcompose board mounted
 let strisoBoardMounted = 0;
 document.oncontextmenu = function() {
   return strisoBoardMounted === 0;
 }
 
 export default {
+  props: {
+      octave: {
+          type: Number,
+          default: 2
+      },
+      input: {
+          type: String,
+          default: "striso-input"
+      },
+      output: {
+          type: String,
+          default: "striso-output"
+      }
+  },
+  computed: {
+    buttons() {
+      return dcomposeLayout(this.octave)
+    }
+  },
   data() {
     return {
-      size:  Math.min(window.innerHeight, window.innerWidth) / 11,
-      buttons: dcompose,
+      size:  Math.min(window.innerHeight, window.innerWidth) / 11
     }
   },
   mounted() {
-    console.log("Striso Studio Build: ", new Date(process.env.build));
     window.addEventListener('resize', this.setSize);
     strisoBoardMounted++;
   },
@@ -50,22 +61,12 @@ export default {
     setSize() {
       this.size =  Math.min(window.innerHeight, window.innerWidth) / 11;
     },
-    noteOn(btn, e) {
-      synth.noteOn(btn, e);
-    },
-    noteOff(btn, e) {
-      synth.noteOff(btn, e);
-    },
-    move(btn, e) {
-      synth.move(btn, e);
-    },
     disableZoom(e) {
       if (e.ctrlKey) {
           e.preventDefault();
           return
       }
     }
-    
-  }
+  },
 }
 </script>
