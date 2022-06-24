@@ -1,82 +1,68 @@
 import Peer from "peerjs";
 import events from "./events";
-import EventEmitter from "eventemitter3";
 
-const log = (...args) => console.log(...args);
-const debug  = (...args) => console.debug(...args);
-// const log = () => {}
-// const debug = () => {}
+const connections = {};
 
-export const peerId = `striso-board-${Math.round(Math.random() * 1e6)}`;
-const peerEvents = new EventEmitter();
-const peer = new Peer(peerId);
+export const PEER_ID_PREFIX = `striso-studio-`;
+export const withoutPeerIdPrefix = str => str.replaceAll(PEER_ID_PREFIX, "");
+export const withPeerIdPrefix = str => PEER_ID_PREFIX + str.replaceAll(PEER_ID_PREFIX, "");
+export const PEER_ID = `${PEER_ID_PREFIX}${Math.round(Math.random() * 1e6)}`;
+export const PEER_SEND_EVENT = "peer-send";
+export const PEER_CONNECTION_EVENT = "peer-connection";
 
-const createConnection = conn => {
+const peer = new Peer(PEER_ID);
+console.log("Available on peer connections on " + PEER_ID);
+
+export const connect = (instanceId, peerId) => {
+    console.log("connect", peerId);
+    disconnect(instanceId);
+    const conn = peer.connect(withPeerIdPrefix(peerId));
+    conn.instanceId = instanceId;
+    return onConnectionCreated(conn);
+}
+
+export const disconnect = (instanceId) => {
+    Object.values(connections)
+        .filter(conn => conn.instanceId === instanceId)
+        .forEach(conn => {
+            conn.close();
+            delete connections[conn.peer];
+        });
+}
+
+export const send = (src, dest) => {
+    events.on(src, data => {
+        events.emit(PEER_SEND_EVENT, [dest || src, data])
+    });
+}
+
+const onConnectionCreated = conn => new Promise((resolve, reject) => {
     conn.on("open", () => {
-        log("connected to peer:" + conn.peer);
-        
-        // incoming peer data is forwarded to the Peer Event Bus.
+        console.log("connected to peer:" + conn.peer);
+        connections[conn.peer] = conn;
+        events.emit(PEER_CONNECTION_EVENT, Object.values(connections).map(conn => conn.peer), conn);
+
+        // incoming peer data is forwarded to the local events
         conn.on('data', ([channel, data]) => {
-            peerEvents.emit(channel, data);
+            events.emit(channel, data);
         });
 
-        // outgoing peer data is sent to all connections. (TODO choose one connection?)
+        // everything send to local "PEER_SEND_EVENT" events is forwarded to peers
         const sendPeerData = ([channel, data]) => {
             conn.send([channel, data]);
         }
-        peerEvents.on("send", sendPeerData);
+        events.on(PEER_SEND_EVENT, sendPeerData);
 
-        // when connection is closed, unsubscribe
+        // Clean up
         conn.on('close', () => {
-            log("disconnected from: "+ conn.peer);
-            peerEvents.off("send", sendPeerData);
+            console.log("disconnected from: " + conn.peer);
+            events.off(PEER_SEND_EVENT, sendPeerData);
+            delete connections[conn.peer];
+            events.emit(PEER_CONNECTION_EVENT, Object.values(connections).map(conn => conn.peer), conn);
         });
-    })
 
-    return conn;
-}
-
-const destructors = {};
-
-// When OTHER connects, store connection.
-peer.on("connection", createConnection)
-
-export const createPeerConnection = async ({ id, instanceId, send, receive }) => {
-    if (!instanceId) throw new Error('instanceId is a required argument');
-
-    destroyPeerConnection(instanceId);
-    const onSend = data => {
-        peerEvents.emit("send", [send, data]);
-    }
-    const onReceive = data => {
-        events.emit(receive, data);
-    }
-    let conn = null;
-    if (send) {
-        events.on(send, onSend);
-    }
-    if (receive) {
-        peerEvents.on(receive, onReceive);
-    }
-    if (id) {
-        id = `striso-board-${id}`;
-        conn  = createConnection(peer.connect(id));
-    }
-    // create destructor
-    destructors[instanceId] = () => {
-        log(`destroying ${instanceId} (${id}, ${send}, ${receive})`);
-        if (send) {
-            events.off(send, onSend);
-        }
-        if (receive) {
-            peerEvents.off(receive, onReceive);
-        }
-        if (conn) {
-            conn.close();
-        }
-    }
-}
-
-export const destroyPeerConnection = instanceId => {
-    if (destructors[instanceId]) destructors[instanceId]();
-}
+        resolve(conn);
+    });
+    conn.on("error", reject);
+});
+peer.on("connection", onConnectionCreated);

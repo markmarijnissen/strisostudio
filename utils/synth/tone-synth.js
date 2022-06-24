@@ -1,4 +1,5 @@
-import { Frequency, Synth, start, Volume  } from "tone";
+import { STRISO_ON, STRISO_OFF, STRISO_MOVE } from "../constants";
+import { Frequency, Synth, start, Volume } from "tone";
 import createPolySynth from "./create-poly-synth";
 
 const clamp = (min, val, max) => Math.max(min, Math.min(val, max));
@@ -20,19 +21,19 @@ export default createPolySynth(6, {
         return synth;
     },
     async onStrisoTouch(synth, e) {
-        switch (e.message) {
-            case "noteOn":
+        switch (e[0]) {
+            case STRISO_ON:
                 await start();
-                synth.note = e.note;
-                synth.triggerAttack(e.note);
+                synth.note = e[1];
+                synth.triggerAttack(e[1]);
                 break;
-            case "noteOff":
+            case STRISO_OFF:
                 synth.triggerRelease();
                 break;
-            case "move":
-                const freq = clamp(0, Frequency(synth.note).toFrequency() + e.bend * 20, 20000);
+            case STRISO_MOVE:
+                const freq = clamp(0, Frequency(synth.note).toFrequency() + e[2] * 20, 20000);
                 synth.setNote(freq);
-                synth.effect.volume.value = -24 * Math.abs(e.tilt);
+                synth.effect.volume.value = -24 * Math.abs(e[3]);
                 break;
         }
     }

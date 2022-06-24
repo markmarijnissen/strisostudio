@@ -11,7 +11,7 @@
 export default {
   async fetch () {
     try {
-      this.page = await this.$content(`index`).fetch();
+      this.page = await this.$content(`components/${this.$route.params.page || 'index'}`).fetch();
     } catch(err) {
       this.error = err;
     }

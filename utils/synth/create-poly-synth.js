@@ -1,3 +1,4 @@
+import { STRISO_ON, STRISO_OFF, STRISO_MOVE } from "../constants";
 // This will 'clone' a single synth up to 'count' voices.
 //
 // You must provide an implementation with the following functions
@@ -21,13 +22,13 @@ const createPolySynth = (count, implementation) => {
         onStrisoTouch(e) {
             let voice = null;
             for (let i = 0; i < count; i++) {
-                if (voices[i].note === e.note) {
+                if (voices[i].note === e[1]) {
                     voice = voices[i];
                     break;
                 }
             } 
-            switch (e.message) {
-                case "noteOn":
+            switch (e[0]) {
+                case STRISO_ON:
                     for (let i = 0; i < count; i++) {
                         if (voices[i].note === null) {
                             voice = voices[i];
@@ -37,19 +38,21 @@ const createPolySynth = (count, implementation) => {
                         }
                     }
                     implementation.onStrisoTouch(voice.synth, e, voices.indexOf(voice));
-                    voice.note = e.note;
+                    voice.note = e[1];
                     voice.time = Date.now();
                     break;
-                case "noteOff":
+                case STRISO_OFF:
                     if (voice) {
                         implementation.onStrisoTouch(voice.synth, e, voices.indexOf(voice));
                         voice.note = null;
                         voice.time = null;
                     }
                     break;
-                case "move":
+                default:
                     if (voice) {
                         implementation.onStrisoTouch(voice.synth, e, voices.indexOf(voice));
+                    } else {
+                        implementation.onStrisoTouch(null, e, -1);
                     }
             }
         }

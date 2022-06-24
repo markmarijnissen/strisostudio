@@ -41,6 +41,7 @@
 }
 </style>
 <script>
+import { STRISO_OFF, STRISO_ON, STRISO_MOVE } from "../utils/constants";
 import { start } from "tone";
 import events from "../utils/events";
 const clamp = (min, val, max) => Math.max(min, Math.min(val, max));
@@ -49,7 +50,8 @@ const scale = (val, scale) => val/scale;
 export default {
     props: {
         config: {
-            type: Object
+            type: Object,
+            default: {"note":"D4","noteLetter":"D","octave":4,"x":8,"y":8.3159,"color":"white"}
         },
         size: {
             type: Number,
@@ -92,40 +94,41 @@ export default {
         }
     },
     methods: {
-        onInput(event) {
-            if(event.note === this.config.note) {
-                // to do
+        onInput(e) {
+            if(e[1] === this.config.note) {
+                switch(e[0]){
+                    case STRISO_ON:
+                        this.down({ clientX: 0, clientY: 0 })
+                        break;
+                    case STRISO_OFF:
+                        this.up();
+                        break;
+                    case STRISO_MOVE:
+                        this.move({
+                            clientX: e[2] * this.size * 0.5, 
+                            clientY: e[3] * this.size * 0.5
+                        });
+                        break;
+                }
             }
         },
         up(){
             if(this.isPressed === true) {
                 this.isPressed = false;
-                events.emit(this.output, {
-                    message: "noteOff",
-                    note: this.config.note,
-                    tilt: 0,
-                    bend: 0,
-                    velocity: 0
-                });
+                events.emit(this.output, [ STRISO_OFF, this.config.note, 0, 0, 0]);
                 this.dpos = [0, 0];
             }
         },
        async down(e){
             if(this.isPressed === false) {
-                await start();
+                if(e.target) await start(); // on a real click, not simulated, unlock audio
                 this.isPressed = true;
                 if(!isNaN(e.clientX)) {
                     this.initialpos = [ e.clientX, e.clientY ];
                 } else {   
                     this.initialpos = [ e.targetTouches[0].clientX, e.targetTouches[0].clientY ];
                 }
-                events.emit(this.output, {
-                    message: "noteOn",
-                    note: this.config.note,
-                    tilt: 0,
-                    bend: 0,
-                    velocity: 1.0
-                });
+                events.emit(this.output, [ STRISO_ON, this.config.note, 0,0,1 ]);
             }
         },
         move(e) {
@@ -143,13 +146,13 @@ export default {
                     this.up(e);
                     return;
                 }
-                events.emit(this.output, {
-                   message: "move",
-                   note: this.config.note,
-                   tilt: clamp(-1, scale(this.dpos[1], this.size * 0.5), 1),
-                   bend: clamp(-1, scale(this.dpos[0], this.size * 0.5), 1),
-                   velocity: 1.0 // not supported
-                });
+                events.emit(this.output, [ 
+                    STRISO_MOVE, 
+                    this.config.note, 
+                    clamp(-1, scale(this.dpos[0], this.size * 0.5), 1), 
+                    clamp(-1, scale(this.dpos[1], this.size * 0.5), 1), 
+                    1.0 
+                ]);
             }
         }
     }

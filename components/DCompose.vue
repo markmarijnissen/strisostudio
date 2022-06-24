@@ -1,5 +1,5 @@
 <template>
-  <div class="dcompose-layout" :style="`--size: ${size}px; height: ${size * 11}px;`">
+  <div class="dcompose-layout" :style="`--size: ${size}px; height: ${height}; width: ${width};`">
     <StrisoButton :config="btn" v-for="(btn,i) in buttons" 
       :key="i" 
       :size="size"
@@ -11,6 +11,7 @@
 </template>
 <style scoped>
 .dcompose-layout {
+  min-height: 200px;
   position: relative;
   user-select: none;
 }
@@ -37,6 +38,14 @@ export default {
       output: {
           type: String,
           default: "striso-output"
+      },
+      width: {
+        type: String,
+        default: "100%"
+      },
+      height: {
+        type: String, 
+        default: "100%"
       }
   },
   computed: {
@@ -46,11 +55,12 @@ export default {
   },
   data() {
     return {
-      size:  Math.min(window.innerHeight, window.innerWidth) / 11
+      size:  30
     }
   },
   mounted() {
     window.addEventListener('resize', this.setSize);
+    this.setSize();
     strisoBoardMounted++;
   },
   unmounted() {
@@ -59,7 +69,7 @@ export default {
   },
   methods: {
     setSize() {
-      this.size =  Math.min(window.innerHeight, window.innerWidth) / 11;
+      this.size =  Math.min(this.$el.clientHeight, this.$el.clientWidth) / 11;
     },
     disableZoom(e) {
       if (e.ctrlKey) {
@@ -68,5 +78,9 @@ export default {
       }
     }
   },
+  watch: {
+    width: "setSize",
+    height: "setSize",
+  }
 }
 </script>

@@ -1,0 +1,9 @@
+<template>
+    <div>
+        <div>led</div>
+        <button>glissando</button>
+        <button>up</button>
+        <button>down</button>
+        <button>options</button>
+    </div>
+</template>

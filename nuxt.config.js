@@ -19,7 +19,7 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [ "@/assets/style.css"],
+  css: [ "@/assets/pure.css","@/assets/style.css"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
@@ -30,7 +30,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss',
+    // '@nuxtjs/tailwindcss',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -39,6 +39,8 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    "nuxt-custom-elements",
+    "@nuxt/content"
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -56,6 +58,36 @@ export default {
     manifest: {
       lang: 'en',
     },
+  },
+
+  content: {
+
+  },
+
+  customElements: {
+    buildDir: `dist/components`,
+    entries: [
+      {
+        name: "core",
+        tags: ["DCompose",
+         "StrisoBoard",
+         "StrisoBoardCasing",
+         "StrisoControls",
+         "StrisoButton",
+          "StrisoMotionSensors",
+          "StrisoNote",
+         "EventButton",
+        "StrisoSynth",
+        "PeerId",
+          "PeerSend",
+          "PeerConnection",
+          "PeerConnectionList"
+        ].map(name => ({
+          name,
+          path: `@/components/${name}.vue`
+        }))
+      },
+    ]
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

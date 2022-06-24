@@ -1,25 +1,8 @@
 <template>
   <div>
-    <d-compose output="striso-out" />
-    <input v-model="text" type="text" /><button @click="connect(id)">connect</button>
-    <!-- <striso-synth input="striso-out" /> -->
-    <peer send="striso-out" :id="id" />
+    <d-compose  width="100vw" height="80vh" />
+    <striso-motion-sensors/>
+    Device ID for receiver: <peer-id />
+    <peer-send input="striso-output" as="peer-input" />
   </div>
 </template>
-<script>
-import StrisoSynth from '../components/StrisoSynth.vue';
-export default {
-  components: { StrisoSynth },
-    data() {
-        return {
-            id: "",
-            text: "",
-        }
-    },
-    methods: {
-        connect(id) {
-            this.id = this.text;
-        }
-    }
-}
-</script>
