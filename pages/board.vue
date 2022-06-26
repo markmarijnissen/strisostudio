@@ -1,10 +1,5 @@
 <template>
-  <div>
-    <d-compose width="100vw" height="80vh" />
-    <!-- <striso-controls /> -->
-    <striso-motion-sensors/>
-    <striso-synth />
-  </div>
+  <striso-board />
 </template>
 <script>
 import PeerConnection from '../components/PeerConnection.vue';

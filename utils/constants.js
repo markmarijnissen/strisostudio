@@ -74,3 +74,10 @@ export const STRISO_MOVE = MIDI_CONTROL_CHANGE;
 export const STRISO_ON = MIDI_NOTE_ON;
 export const STRISO_OFF = MIDI_NOTE_OFF;
 export const STRISO_MOTION = MIDI_CHANNEL_PRESSURE;
+export const STRISO_SET_VELOCITY = MIDI_C_MAIN_VOLUME; // set velocity for all buttons as the web app does not support pressure/velocity
+export const STRISO_CONTROLLER = 100;
+
+export const STRISO_GLISSANDO = 1;
+export const STRISO_UP = 2;
+export const STRISO_DOWN = 3;
+export const STRISO_OPTIONS = 4;

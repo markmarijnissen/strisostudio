@@ -7,21 +7,31 @@
         :class="{ button: true, [config.color]: true }"
         :style="buttonStyle">
             <!-- {{config.note}} -->
-            <div class="dot" :style="dotStyle" v-show="isPressed">&nbsp;</div>
+            <div class="circle" :style="circleStyle" v-show="isPressed"><div class="dot" /></div>
     </div>
 </template>
 <style scoped>
-.dot {
+.circle {
+    position: relative;
     background-color: #FF000033;
-    position: absolute;
-    width: var(--size);
-    height: var(--size);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     border-radius: 50%;
     pointer-events: none;
 }
+.dot {
+    background-color: red;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+}
 .button {
   position: absolute;
-  display: inline-block;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
   border-radius: 50%;
   border: 1px solid black;
   width: var(--size);
@@ -41,7 +51,7 @@
 }
 </style>
 <script>
-import { STRISO_OFF, STRISO_ON, STRISO_MOVE } from "../utils/constants";
+import { STRISO_OFF, STRISO_ON, STRISO_MOVE, STRISO_SET_VELOCITY } from "../utils/constants";
 import { start } from "tone";
 import events from "../utils/events";
 const clamp = (min, val, max) => Math.max(min, Math.min(val, max));
@@ -64,13 +74,18 @@ export default {
         output: {
             type: String,
             default: "striso-output"
+        },
+        disabled: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
         return {
             initialpos: [0,0],
             dpos: [0,0],
-            isPressed: false
+            isPressed: false,
+            velocity: 1.0
         }
     },
     created() {
@@ -86,10 +101,14 @@ export default {
                 top:  `${Math.round(this.config.y * this.size * 0.6)}px`,
             }
         },
-        dotStyle() {
+        circleStyle() {
+            const minRadius = 5;
+            const radius = Math.round(minRadius + ((this.size - minRadius) * this.velocity));
             return {            
                 left: `${this.dpos[0]}px`,
                 top: `${this.dpos[1]}px`,
+                width: `${radius}px`,
+                height: `${radius}px`
             }
         }
     },
@@ -111,8 +130,12 @@ export default {
                         break;
                 }
             }
+            if(e[0] === STRISO_SET_VELOCITY) {
+                this.velocity = e[1];
+            }
         },
-        up(){
+        up(e){
+            if(e && e.target && this.disabled) return;
             if(this.isPressed === true) {
                 this.isPressed = false;
                 events.emit(this.output, [ STRISO_OFF, this.config.note, 0, 0, 0]);
@@ -120,6 +143,7 @@ export default {
             }
         },
        async down(e){
+            if(e && e.target && this.disabled) return;
             if(this.isPressed === false) {
                 if(e.target) await start(); // on a real click, not simulated, unlock audio
                 this.isPressed = true;
@@ -128,10 +152,12 @@ export default {
                 } else {   
                     this.initialpos = [ e.targetTouches[0].clientX, e.targetTouches[0].clientY ];
                 }
-                events.emit(this.output, [ STRISO_ON, this.config.note, 0,0,1 ]);
+                this.dpos = [0, 0];
+                events.emit(this.output, [ STRISO_ON, this.config.note, 0,0, this.velocity ]);
             }
         },
         move(e) {
+            if(e && e.target && this.disabled) return;
             if(this.isPressed === true) {
                 let x = 0, y = 0;
                 if(!isNaN(e.clientX)) {
@@ -151,7 +177,7 @@ export default {
                     this.config.note, 
                     clamp(-1, scale(this.dpos[0], this.size * 0.5), 1), 
                     clamp(-1, scale(this.dpos[1], this.size * 0.5), 1), 
-                    1.0 
+                    this.velocity
                 ]);
             }
         }

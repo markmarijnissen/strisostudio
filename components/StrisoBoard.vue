@@ -1,15 +1,37 @@
 <template>
-    <striso-board-casing>
-        <d-compose :octave="octave" :input="input" :output="output"/>
-        <!-- <striso-controls /> -->
-        <striso-motion-sensors :output="output" />
-        <striso-synth :input="output" />
-        <slot></slot>
-    </striso-board-casing>
+    <div>
+        <striso-board-casing v-show="!showOptions">
+            <d-compose :octave="octave" :input="input" :output="output"/>
+            <striso-controls @options="showOptions = true"/>
+            <striso-motion-sensors :output="output + '-motion'" />
+            <striso-synth :input="output + '-synth'" />
+            <peer-send :input="output + '-peer'" :as="output" />
+            <slot></slot>
+        </striso-board-casing>
+        <div v-show="showOptions">
+            <slot name="options">
+                <striso-options :input="input" :output="output" @close="showOptions = false"/>
+            </slot>
+            <a href="#" class="close" @click.prevent="showOptions = false">&times;</a>
+        </div>
+    </div>
 </template>
+<style scoped>
+.close {
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    color: #ccc;
+    font-size: 40px;
+    line-height: 40px;
+    text-decoration: none;
+}
+</style>
 <script>
+import EventGate from './EventGate.vue'
 // StrisoBoard = Casing + DCompose Layout + Synth + Motion Sensors + Controls
 export default {
+  components: { EventGate },
     props: {
         input: {
             type: String,
@@ -22,7 +44,8 @@ export default {
     },
     data() {
         return {
-            octave: 2
+            octave: 2,
+            showOptions: false
         }
     }
 }
