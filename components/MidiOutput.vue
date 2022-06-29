@@ -1,12 +1,14 @@
 <template>
     <div>
-        <select v-model="name" @click.prevent="refresh">
+        <select v-model="name">
+            <option :value="null"></option>
             <option v-for="d in devices" :value="d.id" :key="d.id">{{d.name}}</option>
         </select>
     </div>
 </template>
 <script>
 import JZZ from "jzz";
+import { getOutputs } from "../utils/midi";
 import midiSynth from "../utils/synth/midi-synth";
 import events from "../utils/events";
 window.JZZ = JZZ;
@@ -18,33 +20,31 @@ export default {
             default: "midi-output"
         }
     },
-    created() {
-        JZZ().onChange().connect(this.onDeviceChange).refresh();
-        this.onDeviceChange();
+    async created() {
+        this.devices = await getOutputs();
         events.on(this.input, this.onInput);
+        this.name = JSON.parse(localStorage[this.id] || "null") || this.name;
     },
     destroyed(){
-        JZZ().onChange().disconnect(this.onDeviceChange);
         events.off(this.input, this.onInput);
+    },
+    computed: {
+        id(){
+            return `${this.input}@midi-output`;
+        }
     },
     data() {
         return { name: null, midiSynth: null, devices: [] };
     },
     methods: {
-        refresh(){
-            JZZ().refresh();
-            this.onDeviceChange();
-        },
-        async onDeviceChange() {
-            this.devices = await JZZ().info().outputs;
-        },
         async onName(name) {
             if(this.midiSynth) {
                 this.midiSynth.destroy();
             }
             if(name) {
-                this.midiSynth = await midiSynth(name)
+                this.midiSynth = await midiSynth(this.instanceId, name);
             }
+            localStorage[this.id] = JSON.stringify(name);
         },
         onInput(e) {
             if(this.midiSynth) {

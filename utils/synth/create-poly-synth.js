@@ -45,7 +45,6 @@ const createPolySynth = (count, implementation) => {
                     implementation.onStrisoTouch(voice.synth, e, voices.indexOf(voice));
                     voice.note = e[1];
                     voice.time = Date.now();
-                    console.log(voices.map(v => v.note).join(","), voices.indexOf(voice));
                     break;
                 case STRISO_OFF:
                     if (voice) {

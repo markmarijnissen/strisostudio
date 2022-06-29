@@ -16,6 +16,11 @@ export default {
             default: true
         }
     },
+    computed: {
+        id(){
+            return `${this.input}-${this.output}@event-gate`;
+        }
+    },
     created(){
         events.on(this.input, this.forward);
     },
@@ -27,7 +32,7 @@ export default {
     },
     data() {
         return {
-            inputValue: this.value
+            inputValue: localStorage[this.id] ? JSON.parse(localStorage[this.id]) : this.value
         }
     },
     methods: {
@@ -40,6 +45,7 @@ export default {
     watch: {
         value(value) {
             this.inputValue = value;
+            localStorage[this.id] = JSON.stringify(value);
         }
     }
 }

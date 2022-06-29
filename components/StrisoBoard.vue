@@ -1,7 +1,7 @@
 <template>
     <div>
         <striso-board-casing v-show="!showOptions">
-            <d-compose :octave="octave" :input="input" :output="output"/>
+            <d-compose :octave="octave" :input="input" :output="output" :initial-velocity="initialVelocity"/>
             <striso-controls @options="showOptions = true"/>
             <striso-motion-sensors :output="output + '-motion'" />
             <striso-synth :input="output + '-synth'" />
@@ -40,6 +40,10 @@ export default {
         output: {
             type: String,
             default: "striso-output"
+        },
+        initialVelocity: {
+            type: Boolean,
+            default: false
         }
     },
     data() {

@@ -1,18 +1,19 @@
 import JZZ from "jzz";
+import { getOutput } from "../midi";
 import { STRISO_ON, STRISO_OFF, STRISO_MOVE, STRISO_MOTION } from "../constants";
 
 import createPolySynth from "./create-poly-synth";
 
-export default async name => {
-    const midiOut = await JZZ().openMidiOut(name);
-    midiOut.connect(msg => console.log(msg.toString()));
+export default async (id, name) => {
+    const midiOut = await getOutput(id, name);
+    if (!name) return null;
 
     return createPolySynth(6, {
         createSynth() {
             return midiOut;
         },
         destroy() {
-            midiOut.destroy();
+            midiOut.disconnect();
         },
         async onStrisoTouch(midiOut, e, i) {
             const tilt = 0.5 * (1 + e[3]);

@@ -2,12 +2,12 @@
     <div 
         @mousedown="down" @touchstart="down"
         @mousemove="move" @touchmove="move"
-        @mouseleave="up" @mouseup="up" @mouseout="up"
-        @touchend="up" @touchleave="up" @touchcancel="up"
+        @mouseleave="up" @touchleavex="up" @mouseout="up"
+        @mouseup="up" @touchend="up" @touchcancel="up"
         :class="{ button: true, [config.color]: true }"
         :style="buttonStyle">
             <!-- {{config.note}} -->
-            <div class="circle" :style="circleStyle" v-show="isPressed"><div class="dot" /></div>
+            <div :class="{'circle': true, 'touch': touch }" :style="circleStyle" v-show="isPressed"><div class="dot" /></div>
     </div>
 </template>
 <style scoped>
@@ -19,6 +19,9 @@
     align-items: center;
     border-radius: 50%;
     pointer-events: none;
+}
+.circle.touch {
+    transform: translateY(calc(-1 * var(--size)));
 }
 .dot {
     background-color: red;
@@ -78,6 +81,10 @@ export default {
         disabled: {
             type: Boolean,
             default: false
+        },
+        initialVelocity: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -85,7 +92,8 @@ export default {
             initialpos: [0,0],
             dpos: [0,0],
             isPressed: false,
-            velocity: 1.0
+            velocity: 1.0,
+            touch: false
         }
     },
     created() {
@@ -115,6 +123,7 @@ export default {
     methods: {
         onInput(e) {
             if(e[1] === this.config.note) {
+                console.log(e);
                 switch(e[0]){
                     case STRISO_ON:
                         this.down({ clientX: 0, clientY: 0 })
@@ -138,6 +147,7 @@ export default {
             if(e && e.target && this.disabled) return;
             if(this.isPressed === true) {
                 this.isPressed = false;
+                this.touch = false;
                 events.emit(this.output, [ STRISO_OFF, this.config.note, 0, 0, 0]);
                 this.dpos = [0, 0];
             }
@@ -149,11 +159,25 @@ export default {
                 this.isPressed = true;
                 if(!isNaN(e.clientX)) {
                     this.initialpos = [ e.clientX, e.clientY ];
+                    this.touch = false;
                 } else {   
+                    this.touch = true;
                     this.initialpos = [ e.targetTouches[0].clientX, e.targetTouches[0].clientY ];
                 }
+                // position [-1 ... +1] from center
+                if(this.initialVelocity === true && e.target) {
+                    const rect = e.target.getBoundingClientRect();
+                    const relativepos = [
+                        2*(this.initialpos[0] - rect.left)/(this.size) - 1, 
+                        2*(this.initialpos[1] - rect.top)/(this.size) - 1
+                    ];
+                    const r = 1- Math.sqrt(relativepos[0]*relativepos[0]+relativepos[1]*relativepos[1]);
+                    this.velocity = clamp(0,r,1);
+                }
+                
                 this.dpos = [0, 0];
                 events.emit(this.output, [ STRISO_ON, this.config.note, 0,0, this.velocity ]);
+                if(e.preventDefault) e.preventDefault();
             }
         },
         move(e) {

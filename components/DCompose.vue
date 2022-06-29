@@ -6,6 +6,7 @@
       :input="input"
       :output="output"
       :disabled="disabled"
+      :initial-velocity="initialVelocity"
       @wheel.passive="disableZoom"
       />
   </div>
@@ -51,6 +52,10 @@ export default {
         default: "100%"
       },
       disabled: {
+        type: Boolean,
+        default: false
+      },
+      initialVelocity: {
         type: Boolean,
         default: false
       }
