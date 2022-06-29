@@ -5,7 +5,7 @@
             <striso-controls @options="showOptions = true"/>
             <striso-motion-sensors :output="output + '-motion'" />
             <striso-synth :input="output + '-synth'" />
-            <peer-send :input="output + '-peer'" :as="output" />
+            <peer-send :input="output + '-peer'" :as="input" />
             <slot></slot>
         </striso-board-casing>
         <div v-show="showOptions">
