@@ -168,10 +168,10 @@ export default {
                     y = e.targetTouches[0].clientY;
                 }
                 this.dpos = [ x - this.initialpos[0], y - this.initialpos[1] ];
-                if(Math.abs(this.dpos[0] > 0.5 * this.size || Math.abs(this.dpos[1] > 0.5 * this.size))) {
-                    this.up(e);
-                    return;
-                }
+                // if(Math.abs(this.dpos[0] > 0.5 * this.size || Math.abs(this.dpos[1] > 0.5 * this.size))) {
+                //     this.up(e);
+                //     return;
+                // }
                 events.emit(this.output, [ 
                     STRISO_MOVE, 
                     this.config.note, 

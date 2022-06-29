@@ -84,7 +84,10 @@ export default {
       }
     },
     setSize() {
-      this.size =  Math.min(this.$el.clientHeight, this.$el.clientWidth) / 11;
+      const size = Math.min(this.$el.clientHeight, this.$el.clientWidth) / 11;
+      if(size > 5) {
+        this.size = size;  
+      }
     },
     disableZoom(e) {
       if (e.ctrlKey) {

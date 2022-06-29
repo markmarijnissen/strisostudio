@@ -25,7 +25,8 @@
                 <p>Midi: (todo)</p>
             </div>
             <div class="pure-u-1-2">
-                <p>Midi: (todo)</p>
+                <p>Midi Output<br/>
+                    <midi-output :input="output" /></p>
             </div>
         </div>
         <h3>Other options</h3>
