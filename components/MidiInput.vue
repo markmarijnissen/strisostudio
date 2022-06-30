@@ -7,8 +7,7 @@
     </div>
 </template>
 <script>
-import { STRISO_ON, STRISO_OFF, STRISO_MOVE } from '../utils/constants';
-import { Frequency } from "tone";
+import midi2striso from "../utils/midi2striso";
 import events from "../utils/events";
 import { getInputs, getInput } from "../utils/midi";
 
@@ -43,16 +42,8 @@ export default {
             localStorage[this.id] = JSON.stringify(name);
         },
         onMessage(msg) {
-            const e = this.convertMidiToStriso(msg);
+            const e = midi2striso(msg);
             events.emit(this.output, e);
-        },
-        convertMidiToStriso(msg) {
-            if(msg.isNoteOn()) {
-                return [ STRISO_ON, Frequency(msg.getNote(),"midi").toNote(), 0, 0, msg[2]/128];
-            }
-            else if(msg.isNoteOff()) {
-                return [ STRISO_OFF, Frequency(msg.getNote(),"midi").toNote(), 0, 0, msg[2]/128];
-            }
         }
     },
     watch: {

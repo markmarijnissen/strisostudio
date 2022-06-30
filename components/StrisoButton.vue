@@ -123,7 +123,6 @@ export default {
     methods: {
         onInput(e) {
             if(e[1] === this.config.note) {
-                console.log(e);
                 switch(e[0]){
                     case STRISO_ON:
                         this.down({ clientX: 0, clientY: 0 })
@@ -177,7 +176,7 @@ export default {
                 
                 this.dpos = [0, 0];
                 events.emit(this.output, [ STRISO_ON, this.config.note, 0,0, this.velocity ]);
-                if(e.preventDefault) e.preventDefault();
+                if(e.preventDefault && e.cancelable) e.preventDefault();
             }
         },
         move(e) {

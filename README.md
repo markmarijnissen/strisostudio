@@ -1,17 +1,32 @@
 # strisostudio
 
+## Features
+
+vStriso
+- accelerometer and gyroscope input
+- tilt and bend input (touch x-y)
+- visualize tilt, bend and velocity
+- octave switcher
+- options button
+- set velocity (with slider in options)
+- set velocity on initial touch (center = 1.0, edge = 0.0)
+- original synthesizer compiled for web
+
+Midi
+- Midi Player (visualize and play tunes)
+- Midi Input (connect hardware striso)
+- Midi Output (play synth)
+
+Connection
+- Connect to Remote Device (peer-to-peer connection)
+- midi to striso events, striso to midi events
+
 ## Notes
 
-Web Striso Controller:
-- input: Striso (midi MPE, visualize params on screen)
-- output: Midi MPE (port from striso firmware?)
-- todo: XY on buttons, ACC/GYR, config velocity?
-
 Web Striso Synth:
-- input: Web Striso Controller (as MPE) | Striso (midi MPE)
 - todo:
-  - Midi MPE to Synth
-  - (Web to Synth)
+  - Midi MPE to Synth (better support for midi in)
+  - better support for Midi OUT
   - Synth editor with live reload
 
 Striso Config:
