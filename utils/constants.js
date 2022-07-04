@@ -1,6 +1,6 @@
 // MIDI Status bytes
 export const MIDI_NOTE_OFF = 0x80;
-export const MIDI_NOTE_ON = 0x90;
+export const MIDI_NOTE_ON = 0x90; 
 export const MIDI_POLY_PRESSURE = 0xa0;
 export const MIDI_CONTROL_CHANGE = 0xb0;
 export const MIDI_PROGRAM_CHANGE = 0xc0;
@@ -70,14 +70,45 @@ export const MIDI_C_MONO = 0x7e; // mono on all notes off
 export const MIDI_C_POLY = 0x7f; // poly on all notes off
 
 // Custom Striso events
+
+// dcompose inputs and outputs (can be send to synth)
 export const STRISO_MOVE = MIDI_CONTROL_CHANGE;
 export const STRISO_ON = MIDI_NOTE_ON;
 export const STRISO_OFF = MIDI_NOTE_OFF;
-export const STRISO_MOTION = MIDI_CHANNEL_PRESSURE;
-export const STRISO_SET_VELOCITY = MIDI_C_MAIN_VOLUME; // set velocity for all buttons as the web app does not support pressure/velocity
-export const STRISO_CONTROLLER = 100;
+export const STRISO_CONFIGURE_VELOCITY = MIDI_C_MAIN_VOLUME; // set velocity for all buttons as the web app does not support pressure/velocity
 
+// striso-motion-sensors output (can be send to synth)
+export const STRISO_MOTION = MIDI_CHANNEL_PRESSURE;
+
+// striso-controls output
 export const STRISO_GLISSANDO = 1;
 export const STRISO_UP = 2;
 export const STRISO_DOWN = 3;
 export const STRISO_OPTIONS = 4;
+
+// Striso Midi Input, send as [ MIDI_CONTROL_CHANGE, x, value ]
+// two messages are sent to make it 14 bit; one has MIDI_C_LSB appended:
+//
+// [ MIDI_CONTROL_CHANGE, MIDI_STRISO_ACC_X,              value ]
+// [ MIDI_CONTROL_CHANGE, MIDI_STRISO_ACC_X | MIDI_C_LSB, value ]
+export const MIDI_STRISO_ACC_X = 16;
+export const MIDI_STRISO_ACC_Y = 17;
+export const MIDI_STRISO_ACC_Z = 18;
+export const MIDI_STRISO_ACC_ABS = 19;
+export const MIDI_STRISO_ROT_X = 80;
+export const MIDI_STRISO_ROT_Y = 81;
+export const MIDI_STRISO_ROT_Z = 82;
+
+// [MIDI_PITCH_BEND | channel, msb, lsb]
+// used for glissando and alternative tunings
+export const MIDI_STRISO_PITCHBEND = MIDI_PITCH_BEND; //x
+
+// [ MIDI_CONTROL_CHANGE | channel, MIDI_STRISO_BEND, value ]
+export const MIDI_STRISO_BEND = 122; //x
+
+// [ MIDI_CONTROL_CHANGE | channel, MIDI_STRISO_TILT, value ]
+export const MIDI_STRISO_TILT = 74; //y
+
+// [ MIDI_CHANNEL_PRESSURE | channel, value] (MPE mode)
+export const MIDI_STRISO_PRESSURE = MIDI_CHANNEL_PRESSURE; //z
+

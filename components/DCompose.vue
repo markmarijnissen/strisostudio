@@ -104,6 +104,7 @@ export default {
   watch: {
     width: "setSize",
     height: "setSize",
+    octave(val) { this.actualOctave = val; }
   }
 }
 </script>

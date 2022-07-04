@@ -50,7 +50,7 @@ export default {
   },
 
   router: {
-    base: "/strisostudio/"
+    base: "/"
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -65,20 +65,34 @@ export default {
   },
 
   customElements: {
-    buildDir: `dist/components`,
+    buildDir: `dist/lib`,
     entries: [
       {
-        name: "core",
-        tags: ["DCompose",
-         "StrisoBoard",
-         "StrisoBoardCasing",
-         "StrisoControls",
-         "StrisoButton",
+        name: "striso",
+        tags: [
+          // Striso
+          "DCompose",
+          "StrisoBoard",
+          "StrisoBoardCasing",
+          "StrisoControls",
+          "StrisoButton",
           "StrisoMotionSensors",
+          "StrisoSynth",
           "StrisoNote",
-         "EventButton",
-        "StrisoSynth",
-        "PeerId",
+          "StrisoVelocitySlider",
+          "StrisoEventLog",
+
+          // Midi
+          "MidiInput",
+          "MidiOutput",
+          "MidiPlayer",
+          
+          // UI / utility
+          "EventButton",
+          "EventGate",
+         
+          // Peer to peer
+          "PeerId",
           "PeerSend",
           "PeerConnection",
           "PeerConnectionList"
@@ -94,5 +108,12 @@ export default {
   build: {},
   env: {
     build: Date.now()
+  },
+  generate: {
+    async routes() {
+      const { $content } = require('@nuxt/content')
+      const files = await $content({ deep: true }).only(['path']).fetch()
+      return files.map(file => file.path.replace('/index','/'))
+    }
   }
 }

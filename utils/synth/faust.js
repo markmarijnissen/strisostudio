@@ -444,7 +444,7 @@ class FaustWasm2ScriptProcessor {
         };
 
         try {
-            const dspFile = await fetch(this.name + ".wasm");
+            const dspFile = await fetch("https://strisostudio.web.app/synth.wasm");
             const dspBuffer = await dspFile.arrayBuffer();
             const dspModule = await WebAssembly.instantiate(dspBuffer, importObject);
             return this.getNode(dspModule.instance, audioCtx, bufferSize);

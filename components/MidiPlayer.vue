@@ -19,7 +19,7 @@
 </style>
 <script>
 import events from "../utils/events";
-import midi2striso from "../utils/midi2striso";
+import { midi2striso } from "../utils/convert-striso-event";
 import JZZ from "jzz";
 import SMF from "jzz-midi-smf";
 SMF(JZZ);

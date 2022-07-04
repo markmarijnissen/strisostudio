@@ -2,7 +2,7 @@ import { STRISO_ON, STRISO_OFF, STRISO_MOVE, STRISO_MOTION } from "../constants"
 
 // import { synth as WorkletSynth } from "./faust-worklet-synth";
 import { synth as Synth } from "./faust";
-import createPolySynth from "./create-poly-synth";
+import cloneVoices from "./clone-voices";
 import { getContext, Frequency } from "tone";
 
 const clamp = (min, x, max) => Math.max(min, Math.min(x, max));
@@ -17,13 +17,13 @@ waitForSynth = waitForSynth.then(async synth => {
     return synth;
 });
 
-export default createPolySynth(6, {
-    async onStrisoTouch(_, e, i) {
+export default cloneVoices(6, {
+    async onStrisoEvent(_, e, i) {
         const synth = await waitForSynth;
         switch (e[0]) {
             case STRISO_ON:
                 synth.setParamValue(`/strisy/v${i}/note`, Frequency(e[1]).toMidi());
-                synth.setParamValue(`/strisy/v${i}/pres`, 0.8);
+                synth.setParamValue(`/strisy/v${i}/pres`, e[4]);
                 synth.setParamValue(`/strisy/v${i}/but_y`, 0);
                 synth.setParamValue(`/strisy/v${i}/vpres`, 0);
                 break;

@@ -54,7 +54,7 @@
 }
 </style>
 <script>
-import { STRISO_OFF, STRISO_ON, STRISO_MOVE, STRISO_SET_VELOCITY } from "../utils/constants";
+import { STRISO_OFF, STRISO_ON, STRISO_MOVE, STRISO_CONFIGURE_VELOCITY } from "../utils/constants";
 import { start } from "tone";
 import events from "../utils/events";
 const clamp = (min, val, max) => Math.max(min, Math.min(val, max));
@@ -122,12 +122,15 @@ export default {
     },
     methods: {
         onInput(e) {
+            if(!e || e.length < 1) return; // invalid event
             if(e[1] === this.config.note) {
                 switch(e[0]){
                     case STRISO_ON:
+                        this.velocity = e[4];
                         this.down({ clientX: 0, clientY: 0 })
                         break;
                     case STRISO_OFF:
+                        this.velocity = e[4];
                         this.up();
                         break;
                     case STRISO_MOVE:
@@ -138,7 +141,7 @@ export default {
                         break;
                 }
             }
-            if(e[0] === STRISO_SET_VELOCITY) {
+            if(e[0] === STRISO_CONFIGURE_VELOCITY) {
                 this.velocity = e[1];
             }
         },
@@ -175,6 +178,7 @@ export default {
                 }
                 
                 this.dpos = [0, 0];
+                if(this.velocity === 0) this.velocity = 1.0; // TODO note-off sets velocity to 0, is this logical?
                 events.emit(this.output, [ STRISO_ON, this.config.note, 0,0, this.velocity ]);
                 if(e.preventDefault && e.cancelable) e.preventDefault();
             }

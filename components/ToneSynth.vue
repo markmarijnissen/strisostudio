@@ -11,10 +11,10 @@ export default {
         }
     },
     created(){
-        events.on(this.input,synth.onStrisoTouch);
+        events.on(this.input,synth.onStrisoEvent);
     },
     destroyed(){
-        events.off(this.input,synth.onStrisoTouch);
+        events.off(this.input,synth.onStrisoEvent);
     },
 }
 </script>

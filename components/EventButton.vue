@@ -10,7 +10,7 @@ export default {
             default: "event-button"
         },
         event: {
-            type: Object,
+            type: [Object, String],
             default: () => ({})
         }
     },

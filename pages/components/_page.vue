@@ -1,5 +1,5 @@
 <template>
-  <article v-if="page">
+  <article v-if="page" class="article">
     <h1>{{ page.title }}</h1>
     <nuxt-content :document="page" />
   </article>
@@ -7,6 +7,11 @@
     {{error}}
   </div>
 </template>
+<style scoped>
+.article {
+  margin: 10px;
+}
+</style>
 <script>
 export default {
   async fetch () {

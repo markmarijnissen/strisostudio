@@ -4,21 +4,37 @@ import events from "./events";
 const connections = {};
 
 export const PEER_ID_PREFIX = `striso-studio-`;
-export const withoutPeerIdPrefix = str => str.replaceAll(PEER_ID_PREFIX, "");
+export const withoutPeerIdPrefix = str => (str || "").replaceAll(PEER_ID_PREFIX, "");
 export const withPeerIdPrefix = str => PEER_ID_PREFIX + str.replaceAll(PEER_ID_PREFIX, "");
-export const PEER_ID = `${PEER_ID_PREFIX}${Math.round(Math.random() * 1e6)}`;
+const PEER_ID = localStorage.STRISO_PEER_ID || `${PEER_ID_PREFIX}${1e5 + Math.round(Math.random() * 1e6)}`;
+if (!localStorage.STRISO_PEER_ID) localStorage.STRISO_PEER_ID = PEER_ID;
+
 export const PEER_SEND_EVENT = "peer-send";
 export const PEER_CONNECTION_EVENT = "peer-connection";
+export const PEER_INIT = "peer-init";
 
-const peer = new Peer(PEER_ID);
-console.log("Available on peer connections on " + PEER_ID);
+let peer = null;
+export const initPeer = () => {
+    if (peer === null) {
+        peer = new Peer(PEER_ID);
+        peer.on("connection", onConnectionCreated);
+        console.log("Available on peer connections on " + PEER_ID);
+        events.emit(PEER_INIT, PEER_ID);
+    }
+    return peer;
+}
+
+export const getPeerIdWhenInitialized = () => peer !== null ? PEER_ID : null;
 
 export const connect = (instanceId, peerId) => {
-    console.log("connect", peerId);
     disconnect(instanceId);
-    const conn = peer.connect(withPeerIdPrefix(peerId));
-    conn.instanceId = instanceId;
-    return onConnectionCreated(conn);
+    const conn = initPeer().connect(withPeerIdPrefix(peerId));
+    console.log("connect", peerId, conn);
+    if (conn) {
+        conn.instanceId = instanceId;
+        return onConnectionCreated(conn);
+    }
+    throw new Error("No Peer Connection");
 }
 
 export const disconnect = (instanceId) => {
@@ -65,4 +81,3 @@ const onConnectionCreated = conn => new Promise((resolve, reject) => {
     });
     conn.on("error", reject);
 });
-peer.on("connection", onConnectionCreated);

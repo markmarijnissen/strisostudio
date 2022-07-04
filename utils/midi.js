@@ -51,4 +51,11 @@ export const getOutput = async (id, name) => {
     return null;
 }
 
+export const kk = (mm,ll) => (mm << 7) + ll;
+export const ll = kk => kk & 0x7F;
+export const mm = kk => kk >> 7;
+export const scale = (val, a = -1, b = 1, x = 0, y = 127) => {
+    return Math.max(x, Math.min((val - a) / (b - a) * (y - x) + x, y))
+}
+
 export default { getInputs, getOutputs, getInput, getOutput };

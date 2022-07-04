@@ -1,18 +1,19 @@
-# Striso Studio
+## [Virtual Striso](./board/)
 
-## Apps:
-
-[Striso Board](./board/)
 - Tilt, bend, accelerometer and gyroscope input.
 - Original onboad synthesizer.
 - Octave switch buttons.
 - Visualize note on, note off, tilt, bend and velocity.
 - Connect to remote devices.
+- MIDI input to visualize notes (from the hardware striso board, or a piano, etc)
+- MIDI output 
+- MIDI player - play and visualize MIDI files on the d-compose note layout
 
-Not supported:
-- Velocity (velocity is fixed in options)
-- MIDI input/output (to do) 
+Compared to the hardware striso, the Virtual Striso lacks velocity, pressure and haptic feedback.
 
-## Experiments:
+Not supported (yet):
+- Glissando
 
-- A simple way to [display and play notes](./player/) on a Striso Board, useful for teaching.
+## [Striso Web Components](/components/)
+
+Create your own striso web application by connecting the Striso Board to Midi Players, Synths or other devices using a peer to peer (WebRTC) connection.

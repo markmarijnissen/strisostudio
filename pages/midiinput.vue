@@ -1,6 +1,6 @@
 <template>
     <div>
-        <midi-input :output="this.input" />
+        <midi-input :output="this.input" :striso="false" />
         <ol>
             <li v-for="(msg,i) in log" :key="i">{{msg}}</li>
         </ol>

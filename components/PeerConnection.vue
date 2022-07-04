@@ -3,12 +3,9 @@
         <input type="text" placeholder="Remote Device ID" v-model="peerId" /><button @click.prevent="connect(peerId)">Connect</button>{{ connected ? "✅" : "❌"}}
     </div>
     <peer-id  v-else-if="ui === 'id'" />
-    <div v-else-if="ui === 'connect'">
-        <input type="text" v-model="peerId" /><button @click.prevent="connect(peerId)">Connect</button>
-    </div>
 </template>
 <script>
-import { PEER_ID, connect as peerConnect, disconnect as peerDisconnect, withoutPeerIdPrefix, PEER_CONNECTION_EVENT } from "../utils/peer";
+import { connect as peerConnect, disconnect as peerDisconnect, withoutPeerIdPrefix, PEER_CONNECTION_EVENT } from "../utils/peer";
 import events from "../utils/events";
 
 export default {
@@ -23,9 +20,6 @@ export default {
         }
     },
     computed: {
-        myPeerId(){
-            return PEER_ID
-        },
         connected() {
             return this.connections
                 .map(peerId => withoutPeerIdPrefix(peerId))
@@ -34,7 +28,7 @@ export default {
     },
     data() {
         return {
-            peerId: "",
+            peerId: localStorage["PeerConnection"] || "",
             instanceId: Math.round(Math.random() * 1e8),
             connections: []
         }
@@ -52,6 +46,7 @@ export default {
         connect(id) {
             if(id) {
                 this.peerId = id;
+                localStorage['PeerConnection'] = id;
                 peerConnect(this.instanceId, this.peerId);
             }
         },
@@ -61,6 +56,7 @@ export default {
         onPeerConnection(connections) {
             this.connections = connections;
             if(connections.length > 0) {
+                localStorage['PeerConnection'] = withoutPeerIdPrefix(connections[0]);
                 this.peerId = withoutPeerIdPrefix(connections[0]);
             }
         }

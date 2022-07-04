@@ -8,7 +8,7 @@ import { STRISO_ON, STRISO_OFF, STRISO_MOVE } from "../constants";
 //     noteOff({ note, tilt, bent, velocity, message: "noteOff" }) { },
 //     move({ note, tilt, bent, velocity, message: "move" }) { },
 // }
-const createPolySynth = (count, implementation) => {
+const cloneVoices = (count, implementation) => {
     const voices = [];
     for (let i = 0; i < count; i++) {
         voices.push({
@@ -24,7 +24,7 @@ const createPolySynth = (count, implementation) => {
                 implementation.destroy();
             }
         },
-        onStrisoTouch(e) {
+        onStrisoEvent(e) {
             let voice = null;
             for (let i = 0; i < count; i++) {
                 if (voices[i].note === e[1]) {
@@ -42,26 +42,26 @@ const createPolySynth = (count, implementation) => {
                             voice = voices[i];
                         }
                     }
-                    implementation.onStrisoTouch(voice.synth, e, voices.indexOf(voice));
+                    implementation.onStrisoEvent(voice.synth, e, voices.indexOf(voice));
                     voice.note = e[1];
                     voice.time = Date.now();
                     break;
                 case STRISO_OFF:
                     if (voice) {
-                        implementation.onStrisoTouch(voice.synth, e, voices.indexOf(voice));
+                        implementation.onStrisoEvent(voice.synth, e, voices.indexOf(voice));
                         voice.note = null;
                         voice.time = null;
                     }
                     break;
                 default:
                     if (voice) {
-                        implementation.onStrisoTouch(voice.synth, e, voices.indexOf(voice));
+                        implementation.onStrisoEvent(voice.synth, e, voices.indexOf(voice));
                     } else {
-                        implementation.onStrisoTouch(null, e, -1);
+                        implementation.onStrisoEvent(null, e, -1);
                     }
             }
         }
     }
 }
 
-export default createPolySynth
+export default cloneVoices

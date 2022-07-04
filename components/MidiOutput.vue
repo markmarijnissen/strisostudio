@@ -48,7 +48,7 @@ export default {
         },
         onInput(e) {
             if(this.midiSynth) {
-                this.midiSynth.onStrisoTouch(e);
+                this.midiSynth.onStrisoEvent(e);
             }
         }
     },

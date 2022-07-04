@@ -2,7 +2,7 @@
     <input type="range" :min="0" :max="1000" v-model="velocity" @change="setVelocity" />
 </template>
 <script>
-import { STRISO_SET_VELOCITY } from '../utils/constants'
+import { STRISO_CONFIGURE_VELOCITY } from '../utils/constants'
 import events from "../utils/events";
 export default {
     props: {
@@ -18,7 +18,7 @@ export default {
     },
     methods: {
         setVelocity() {
-            events.emit(this.output, [STRISO_SET_VELOCITY, this.velocity / 1000 ]);
+            events.emit(this.output, [STRISO_CONFIGURE_VELOCITY, this.velocity / 1000 ]);
         }
     }
 }

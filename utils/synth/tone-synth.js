@@ -1,10 +1,10 @@
 import { STRISO_ON, STRISO_OFF, STRISO_MOVE } from "../constants";
 import { Frequency, Synth, start, Volume } from "tone";
-import createPolySynth from "./create-poly-synth";
+import cloneVoices from "./clone-voices";
 
 const clamp = (min, val, max) => Math.max(min, Math.min(val, max));
 
-export default createPolySynth(6, {
+export default cloneVoices(6, {
     createSynth() {
         let synth = new Synth({
             envelope: {
@@ -20,7 +20,7 @@ export default createPolySynth(6, {
         effect.toDestination();
         return synth;
     },
-    async onStrisoTouch(synth, e) {
+    async onStrisoEvent(synth, e) {
         switch (e[0]) {
             case STRISO_ON:
                 await start();

@@ -7,6 +7,11 @@
     {{error}}
   </div>
 </template>
+<style scoped>
+article {
+  margin: 10px;
+}
+</style>
 <script>
 export default {
   async fetch () {

@@ -7,7 +7,7 @@
     </div>
 </template>
 <script>
-import midi2striso from "../utils/midi2striso";
+import { midi2striso } from "../utils/convert-striso-event";
 import events from "../utils/events";
 import { getInputs, getInput } from "../utils/midi";
 
@@ -16,6 +16,10 @@ export default {
         output: {
             type: String,
             default: "midi-input"
+        },
+        striso: {
+            type: Boolean,
+            default: true
         }
     },
     async created() {
@@ -42,7 +46,7 @@ export default {
             localStorage[this.id] = JSON.stringify(name);
         },
         onMessage(msg) {
-            const e = midi2striso(msg);
+            const e = this.striso ? midi2striso(msg) : msg;
             events.emit(this.output, e);
         }
     },
