@@ -18,15 +18,13 @@ export default {
         }
     },
     created(){
+        start().then(() => {
+            this.soundEnabled = true;
+        })
         events.on(this.input,synth.onStrisoEvent);
     },
     destroyed(){
         events.off(this.input,synth.onStrisoEvent);
-    },
-    created(){
-        start().then(() => {
-            this.soundEnabled = true;
-        })
     },
     data() {
         return {

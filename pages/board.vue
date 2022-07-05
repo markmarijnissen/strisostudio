@@ -2,6 +2,7 @@
   <div>
     <striso-board  />
     <midi-player class="midi-player" />
+    <striso-event-log input="striso-output-synth" class="sm" />
   </div>
 </template>
 <style>

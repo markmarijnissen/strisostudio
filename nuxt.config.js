@@ -66,6 +66,7 @@ export default {
 
   customElements: {
     buildDir: `dist/lib`,
+    modern: true,
     entries: [
       {
         name: "striso",
@@ -101,11 +102,19 @@ export default {
           path: `@/components/${name}.vue`
         }))
       },
+      {
+        name: "faust-ide",
+        tags: ["FaustIdeIntegration", "MidiInput", "StrisoBoard", "PeerConnection"].map(name => ({
+          name,
+          path: `@/components/${name}.vue`
+        }))
+      }
     ]
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+  modern: 'client',
   env: {
     build: Date.now()
   },

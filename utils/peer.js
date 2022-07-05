@@ -6,16 +6,19 @@ const connections = {};
 export const PEER_ID_PREFIX = `striso-studio-`;
 export const withoutPeerIdPrefix = str => (str || "").replaceAll(PEER_ID_PREFIX, "");
 export const withPeerIdPrefix = str => PEER_ID_PREFIX + str.replaceAll(PEER_ID_PREFIX, "");
-const PEER_ID = localStorage.STRISO_PEER_ID || `${PEER_ID_PREFIX}${1e5 + Math.round(Math.random() * 1e6)}`;
-if (!localStorage.STRISO_PEER_ID) localStorage.STRISO_PEER_ID = PEER_ID;
 
 export const PEER_SEND_EVENT = "peer-send";
 export const PEER_CONNECTION_EVENT = "peer-connection";
 export const PEER_INIT = "peer-init";
 
+let PEER_ID = null
 let peer = null;
-export const initPeer = () => {
+export const initPeer = (deviceName = 'striso-studio') => {
     if (peer === null) {
+        const key = `STRISO_PEER_ID[${deviceName}]`;
+        PEER_ID = localStorage[key] || `${PEER_ID_PREFIX}${1e5 + Math.round(Math.random() * 1e6)}`;
+        if (!localStorage[key]) localStorage[key] = PEER_ID;
+        
         peer = new Peer(PEER_ID);
         peer.on("connection", onConnectionCreated);
         console.log("Available on peer connections on " + PEER_ID);

@@ -9,10 +9,11 @@ import { STRISO_ON, STRISO_OFF, STRISO_MOVE } from "../constants";
 //     move({ note, tilt, bent, velocity, message: "move" }) { },
 // }
 const cloneVoices = (count, implementation) => {
+    const state = {};
     const voices = [];
     for (let i = 0; i < count; i++) {
         voices.push({
-            synth: typeof implementation.createSynth === "function" ? implementation.createSynth() : null,
+            synth: typeof implementation.createSynth === "function" ? implementation.createSynth(state) : null,
             note: null,
             time: null
         });

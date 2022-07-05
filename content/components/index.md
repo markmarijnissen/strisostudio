@@ -5,7 +5,7 @@ For advanced users, it is possible to create your own Striso Web Apps using cust
 To get started, include the striso web-components javascript to your page as follows.
 
 ```html
-<script src="https://strisostudio.web.app/lib/striso/striso.js" />
+<script src="https://strisostudio.web.app/lib/striso/striso.modern.js" />
 ```
 
 This will make custom web compoments available. For example, you can render a DCompose note layout that sends output to a synth:

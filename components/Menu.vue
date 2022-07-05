@@ -6,7 +6,7 @@
             <nuxt-link to="/board/" class="pure-menu-link">vStriso</nuxt-link>
         </li>
         <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-            <nuxt-link to="/components/" class="pure-menu-link">Web Components</nuxt-link>
+            <a href="#" class="pure-menu-link">Web Components</a>
             <ul class="pure-menu-children">
                 <li class="pure-menu-item" v-for="c in components" :key="c.link">
                     <nuxt-link :to="c.path" class="pure-menu-link">{{c.slug}}</nuxt-link>
@@ -21,6 +21,7 @@ export default {
     data() {
         return {
             components: [
+                { path: "/components/", slug: "Getting Started" },
                 { path: "/components/StrisoBoard", slug: "StrisoBoard" },
                 { path: "/components/StrisoBoardCasing", slug: "StrisoBoardCasing" },
                 { path: "/components/DCompose", slug: "DCompose" },

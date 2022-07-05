@@ -1,0 +1,34 @@
+{
+    "rules": {
+        ".read": false,
+        ".write": false,
+        "$version": {
+            "users": {
+                ".read": "root.child('v2').child('users').child(auth.uid).child('role').val() == 'admin' || root.child($version).child('users').child(auth.uid).child('role').val() == 'admin'",
+                ".write": "root.child($version).child('users').child(auth.uid).child('role').val() == 'admin'",
+                "$uid": {
+                    ".read": "auth.uid == $uid"
+                }
+            },
+            "config": {
+                ".read": true,
+                "$key": {
+                    ".write": "root.child($version).child('users').child(auth.uid).child('role').val() == 'admin'",
+                }
+            },
+            "stats": {
+                ".read": "root.child('v2').child('users').child(auth.uid).child('role').val() == 'admin' || root.child($version).child('users').child(auth.uid).child('role').val() == 'admin'",
+                "$yearmonth": {
+                    "$day": {
+                        "$uid": {
+                            "$event": {
+                                ".read": "auth.uid == $uid",
+                                ".write": "auth.uid == $uid"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
