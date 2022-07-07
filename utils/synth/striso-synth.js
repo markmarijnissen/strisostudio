@@ -4,10 +4,11 @@ import cloneVoices from "./clone-voices";
 import onStrisoEvent from "./striso-synth-on-striso-event";
 import { getContext, start } from "tone";
 
-export default cloneVoices(6, {
-    createSynth(state) {
-        if (!state.getSynth) {
-            state.getSynth = start()
+export default cloneVoices({
+    count: 6,
+    getSynth() {
+        if (!this.synth) {
+            this.synth = start()
                 .then(() => {
                     const context = getContext().rawContext._nativeAudioContext;
                     return Synth.createDSP(context, 1024);
@@ -19,7 +20,7 @@ export default cloneVoices(6, {
                     return synth;
                 });
         }
-        return () => state.getSynth;
+        return this.synth;
     },
     onStrisoEvent
 });

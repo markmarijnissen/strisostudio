@@ -3,21 +3,20 @@ import { STRISO_ON, STRISO_OFF, STRISO_MOVE } from "../constants";
 //
 // You must provide an implementation with the following functions
 // {
-//     createSynth(){ return synth },
-//     noteOn({ note, tilt, bent, velocity, message: "noteOn" }) { },
-//     noteOff({ note, tilt, bent, velocity, message: "noteOff" }) { },
-//     move({ note, tilt, bent, velocity, message: "move" }) { },
+//     getSynth(voiceIndex){ return synth },
+//     onStrisoEvent(event) { }
+//     destroy() { }
 // }
-const cloneVoices = (count, implementation) => {
-    const state = {};
+const cloneVoices = (implementation) => {
+    const count = implementation.count || 6;
     const voices = [];
     for (let i = 0; i < count; i++) {
         voices.push({
-            synth: typeof implementation.createSynth === "function" ? implementation.createSynth(state) : null,
             note: null,
             time: null
         });
     }
+    if (!implementation.getSynth) implementation.getSynth = () => null;
 
     return {
         destroy() {
@@ -25,41 +24,51 @@ const cloneVoices = (count, implementation) => {
                 implementation.destroy();
             }
         },
-        onStrisoEvent(e) {
+        async onStrisoEvent(e) {
+            if (!e) {
+                console.error("Empty onStrisoEvent", e);
+                return;
+            }
+            let synth = null;
             let voice = null;
-            for (let i = 0; i < count; i++) {
-                if (voices[i].note === e[1]) {
-                    voice = voices[i];
-                    break;
+            let voiceIndex = -1;
+            if (e[1]) {
+                for (let i = 0; i < count; i++) {
+                    if (voices[i].note === e[1]) {
+                        voice = voices[i];
+                        voiceIndex = i;
+                        break;
+                    }
                 }
-            } 
+            }
             switch (e[0]) {
                 case STRISO_ON:
                     for (let i = 0; i < count; i++) {
                         if (voices[i].note === null) {
                             voice = voices[i];
+                            voiceIndex = i;
                             break;
                         } else if (voice === null || voice.time > voices[i].time) {
                             voice = voices[i];
+                            voiceIndex = i;
                         }
                     }
-                    implementation.onStrisoEvent(voice.synth, e, voices.indexOf(voice));
+                    synth = await implementation.getSynth.call(implementation, voiceIndex);
+                    implementation.onStrisoEvent(synth, e, voiceIndex);
                     voice.note = e[1];
                     voice.time = Date.now();
                     break;
                 case STRISO_OFF:
                     if (voice) {
-                        implementation.onStrisoEvent(voice.synth, e, voices.indexOf(voice));
+                        synth = await implementation.getSynth.call(implementation, voiceIndex);
+                        implementation.onStrisoEvent(synth, e, voiceIndex);
                         voice.note = null;
                         voice.time = null;
                     }
                     break;
                 default:
-                    if (voice) {
-                        implementation.onStrisoEvent(voice.synth, e, voices.indexOf(voice));
-                    } else {
-                        implementation.onStrisoEvent(null, e, -1);
-                    }
+                    synth = await implementation.getSynth.call(implementation, voiceIndex);
+                    implementation.onStrisoEvent(synth, e, voiceIndex);
             }
         }
     }

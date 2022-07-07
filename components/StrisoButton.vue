@@ -2,7 +2,7 @@
     <div 
         @mousedown="down" @touchstart="down"
         @mousemove="move" @touchmove="move"
-        @mouseleave="up" @touchleavex="up" @mouseout="up"
+        @mouseleave="up"  @mouseout="up"
         @mouseup="up" @touchend="up" @touchcancel="up"
         :class="{ button: true, [config.color]: true }"
         :style="buttonStyle">
@@ -59,6 +59,17 @@ import { start } from "tone";
 import events from "../utils/events";
 const clamp = (min, val, max) => Math.max(min, Math.min(val, max));
 const scale = (val, scale) => val/scale;
+
+const is_ios = [
+    'iPad Simulator',
+    'iPhone Simulator',
+    'iPod Simulator',
+    'iPad',
+    'iPhone',
+    'iPod'
+  ].includes(navigator.platform)
+  // iPad on iOS 13 detection
+  || (navigator.userAgent.includes("Mac") && "ontouchend" in document);
 
 export default {
     props: {
@@ -146,16 +157,17 @@ export default {
             }
         },
         up(e){
-            if(e && e.target && this.disabled) return;
+            if((e && e.target && this.disabled) || (e.type === "mouseup" && is_ios)) return;
             if(this.isPressed === true) {
                 this.isPressed = false;
                 this.touch = false;
                 events.emit(this.output, [ STRISO_OFF, this.config.note, 0, 0, 0]);
                 this.dpos = [0, 0];
             }
+            if(e.preventDefault && e.cancelable) e.preventDefault();
         },
        async down(e){
-            if(e && e.target && this.disabled) return;
+            if((e && e.target && this.disabled) || (e.type === "mousedown" && is_ios)) return;
             if(this.isPressed === false) {
                 if(e.target) await start(); // on a real click, not simulated, unlock audio
                 this.isPressed = true;
@@ -184,7 +196,7 @@ export default {
             }
         },
         move(e) {
-            if(e && e.target && this.disabled) return;
+            if((e && e.target && this.disabled) || (e.type === "mousemove" && is_ios)) return;
             if(this.isPressed === true) {
                 let x = 0, y = 0;
                 if(!isNaN(e.clientX)) {
@@ -206,6 +218,7 @@ export default {
                     clamp(-1, scale(this.dpos[1], this.size * 0.5), 1), 
                     this.velocity
                 ]);
+                if(e.preventDefault && e.cancelable) e.preventDefault();
             }
         }
     }

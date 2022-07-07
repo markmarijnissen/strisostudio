@@ -32,6 +32,8 @@ table {
 <script>
 import { STRISO_MOTION } from "../utils/constants";
 import events from "../utils/events";
+import throttle from "lodash.throttle";
+
 export default {
     props: {
         ui: {
@@ -44,6 +46,7 @@ export default {
         }
     },
     created(){
+        this.onMotion = throttle(this.onMotion,10);
         window.addEventListener("devicemotion", this.onMotion);
     },
     destroyed(){

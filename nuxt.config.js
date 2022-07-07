@@ -11,7 +11,7 @@ export default {
     title: 'Striso Studio',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
@@ -55,9 +55,19 @@ export default {
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
+    meta: {
+      name: "Striso Studio",
+      short_name: "StrisoStudio",
+      mobileAppIOS: true,
+      nativeUI: true
+    },
     manifest: {
+      name: "Striso Studio",
       lang: 'en',
     },
+    icon: {
+      source: "@/static/icon.png"
+    }
   },
 
   content: {

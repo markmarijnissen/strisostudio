@@ -13,9 +13,18 @@
                 </li>
             </ul>
         </li>
+        <li class="pure-menu-item">
+            <nuxt-link to="/faust/" class="pure-menu-link">Synth Editor</nuxt-link>
+        </li>
     </ul>
     </div>
 </template>
+<style scoped>
+.pure-menu {
+    max-width: 100%;
+    overflow: hidden;
+}
+</style>
 <script>
 export default {
     data() {

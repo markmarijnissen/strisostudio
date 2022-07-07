@@ -5,11 +5,13 @@ import { striso2midi }  from "../convert-striso-event";
 
 export default async (id, name, voices = 6) => {
     if (!name) return null;
-    const midiOut = await getOutput(id, name);
-
-    return cloneVoices(voices, {
-        createSynth() {
-            return midiOut;
+    return cloneVoices({
+        count: voices,
+        async getSynth() {
+            if (!this.midiOut) {
+                this.midiOut = await getOutput(id, name);
+            }
+            return this.midiOut;
         },
         destroy() {
             midiOut.disconnect();

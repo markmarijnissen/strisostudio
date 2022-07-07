@@ -2,7 +2,7 @@
     <div class="striso-controls" :style="`--button-size: ${buttonSize}`">
         <div class="title">vStriso</div>
         <div :class="{ led: true, active: glissando }"></div>
-        <button :class="{ glissando: true, active: glissando }" @click.prevent="onGlissando"></button>
+        <button :class="{ glissando: true, active: glissando }" @click.prevent="onGlissando">&nbsp;</button>
         <div class="octave">
             <!-- <div :class="{ 'octave-led'  : true, active: octave >= 5 }"></div> -->
             <div :class="{ 'octave-led'  : true, active: octave >= 4 }"></div>
@@ -27,11 +27,16 @@
         display: flex;
         align-items: center;
         flex-direction: column;
-        align-content: space-around;
+        align-content: center;
         width: 12%;
         height: 100%;
         justify-content: space-around;
-        --button-size: 50px;
+        flex-wrap: nowrap;
+        margin: 0;
+        padding: 0;
+        user-select: none;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
     }
     .octave {
         display: flex;
@@ -66,13 +71,16 @@
         background-color: greenyellow;
     }
     .striso-controls button {
+        display: block;
+        color: black;
         background: white;
         border: 1px solid black;
         width: var(--button-size);
         height: var(--button-size);
         line-height: var(--button-size);
         font-size: calc(var(--button-size) * 0.8);
-        /* box-shadow: 3px 3px black; */
+        box-shadow: 1px 1px black;      
+        padding: 0;
     }
     .striso-controls button:hover {
         background: #eee;
@@ -80,8 +88,8 @@
     .striso-controls button:active, .striso-controls button.active {
         box-shadow: none;
         position: relative;
-        /* top: 3px; */
-        /* left: 3px; */
+        top: 1px;
+        left: 1px;
     }
     .striso-controls .glissando {
         border-radius: 50%;

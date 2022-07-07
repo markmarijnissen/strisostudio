@@ -16,6 +16,9 @@
   min-height: 200px;
   position: relative;
   user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  touch-action: none;
 }
 </style>
 <script>

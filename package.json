@@ -7,7 +7,7 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "deploy":"nuxt generate && firebase deploy",
+    "deploy": "nuxt generate && firebase deploy",
     "lint:prettier": "prettier --check .",
     "lint": "npm run lint:prettier",
     "lintfix": "prettier --write --list-different ."
@@ -20,6 +20,7 @@
     "gyronorm": "^2.0.6",
     "jzz": "^1.5.1",
     "jzz-midi-smf": "^1.6.9",
+    "lodash.throttle": "^4.1.1",
     "mpe": "^1.0.4",
     "nuxt": "^2.15.8",
     "nuxt-custom-elements": "^1.9.1",

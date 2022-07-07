@@ -4,10 +4,8 @@ import { Frequency } from "tone";
 const clamp = (min, x, max) => Math.max(min, Math.min(x, max));
 const scale = (x, scale) => x / scale;
 
-export default async function (getSynth, e, i) {
-    const synth = await getSynth();
-    if (!synth) return; // no synth is running (yet).
-
+export default async function (synth, e, i) {
+    if (!synth) return; // synth not ready (yet)
     switch (e[0]) {
         case STRISO_ON:
             synth.setParamValue(`/strisy/v${i}/note`, Frequency(e[1]).toMidi());
