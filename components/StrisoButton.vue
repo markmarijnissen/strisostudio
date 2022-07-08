@@ -21,7 +21,7 @@
     pointer-events: none;
 }
 .circle.touch {
-    transform: translateY(calc(-1 * var(--size)));
+    /* transform: translateY(calc(-1 * var(--size))); */
 }
 .dot {
     background-color: red;
@@ -157,17 +157,17 @@ export default {
             }
         },
         up(e){
-            if((e && e.target && this.disabled) || (e.type === "mouseup" && is_ios)) return;
+            if((e && e.target && this.disabled) || (e && e.type === "mouseup" && is_ios)) return;
             if(this.isPressed === true) {
                 this.isPressed = false;
                 this.touch = false;
                 events.emit(this.output, [ STRISO_OFF, this.config.note, 0, 0, 0]);
                 this.dpos = [0, 0];
             }
-            if(e.preventDefault && e.cancelable) e.preventDefault();
+            if(e && e.preventDefault && e.cancelable) e.preventDefault();
         },
        async down(e){
-            if((e && e.target && this.disabled) || (e.type === "mousedown" && is_ios)) return;
+            if((e && e.target && this.disabled) || (e && e.type === "mousedown" && is_ios)) return;
             if(this.isPressed === false) {
                 if(e.target) await start(); // on a real click, not simulated, unlock audio
                 this.isPressed = true;
@@ -192,11 +192,11 @@ export default {
                 this.dpos = [0, 0];
                 if(this.velocity === 0) this.velocity = 1.0; // TODO note-off sets velocity to 0, is this logical?
                 events.emit(this.output, [ STRISO_ON, this.config.note, 0,0, this.velocity ]);
-                if(e.preventDefault && e.cancelable) e.preventDefault();
+                if(e && e.preventDefault && e.cancelable) e.preventDefault();
             }
         },
         move(e) {
-            if((e && e.target && this.disabled) || (e.type === "mousemove" && is_ios)) return;
+            if((e && e.target && this.disabled) || (e && e.type === "mousemove" && is_ios)) return;
             if(this.isPressed === true) {
                 let x = 0, y = 0;
                 if(!isNaN(e.clientX)) {
@@ -218,7 +218,7 @@ export default {
                     clamp(-1, scale(this.dpos[1], this.size * 0.5), 1), 
                     this.velocity
                 ]);
-                if(e.preventDefault && e.cancelable) e.preventDefault();
+                if(e && e.preventDefault && e.cancelable) e.preventDefault();
             }
         }
     }

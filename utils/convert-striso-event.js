@@ -139,9 +139,11 @@ export const midi2striso = createMidi2Striso();
 
 // convert striso touch events to midi messages
 export const striso2midi = (e, channel) => {
-    const bend = JZZ.MIDI.pitchBendF(channel, e[2]);
+    // const bend = JZZ.MIDI.pitchBendF(channel, e[2]);
     // const tilt = JZZ.MIDI.mod(channel, Math.round(scale(e[3], -1, 1, 0, 16384)));
     // const bend = JZZ.MIDI([MIDI_CONTROL_CHANGE | channel, MIDI_STRISO_BEND, scale(e[2], -1, 1, 0, 127)]);
+    // const bend = JZZ.MIDI.aftertouch(channel, e[1], scale(e[2], 0, 127))
+    const bend = JZZ.MIDI.pressure(channel, Math.round(scale(e[2],-1, 1, 0,127)))
     const tilt = JZZ.MIDI([MIDI_CONTROL_CHANGE | channel, MIDI_STRISO_TILT, Math.round(scale(e[3], -1, 1, 0, 127))]);
 
     switch (e[0]) {

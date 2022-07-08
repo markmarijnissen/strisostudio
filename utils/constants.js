@@ -104,7 +104,8 @@ export const MIDI_STRISO_ROT_Z = 82;
 export const MIDI_STRISO_PITCHBEND = MIDI_PITCH_BEND; //x
 
 // [ MIDI_CONTROL_CHANGE | channel, MIDI_STRISO_BEND, value ]
-export const MIDI_STRISO_BEND = 122; //x
+// export const MIDI_STRISO_BEND = 122; //x
+export const MIDI_STRISO_BEND = MIDI_C_MPE_AFTERTOUCH;
 
 // [ MIDI_CONTROL_CHANGE | channel, MIDI_STRISO_TILT, value ]
 export const MIDI_STRISO_TILT = 74; //y
