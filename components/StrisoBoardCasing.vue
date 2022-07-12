@@ -9,7 +9,7 @@
     background: beige;
     width: 192mm;
     height: 174mm;
-    /* border-radius: 5%; */
+    border-radius: 2%;
     border: 1px solid black;
 }
 .striso-board .dcompose-layout {
