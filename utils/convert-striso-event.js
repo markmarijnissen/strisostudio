@@ -70,7 +70,7 @@ export const createMidi2Striso = () => {
         }
         else if (isMidiControlChange(msg)) {
             const n = channel2note(c);
-            const value = ((msg[2] / 127) * 2) - 1;
+            const value = -1 * (((msg[2] / 127) * 2) - 1);
             let i = -1;
             if (isBend(msg)) i = 0;
             else if (isTilt(msg)) i = 1;
@@ -90,7 +90,7 @@ export const createMidi2Striso = () => {
                 console.warn("pitch bend without note", n, c, channels, buttons, msg);
                 return null;
             }
-            const value = scale(kk(msg[1], msg[2]), 0, 16384, -1, 1);
+            const value = ((scale(kk(msg[1], msg[2]), 0, 16384, 0, 2) + 1) % 2) - 1;
             buttons[n][0] = value;
             return [STRISO_MOVE, n].concat(buttons[n]); 
         }
