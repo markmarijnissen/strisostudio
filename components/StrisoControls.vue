@@ -43,26 +43,21 @@
         align-items: center;
         flex-direction: column;
     }
-    .up, .down {
-        margin-bottom:5px;
-    }
-    .up {
-        margin-top: 2px;
-    }
     .octave-led {
         background-color: transparent;
-        width: 100%;
+        width: 5px;
         height: 5px;
-        margin: 2px 0;
+        margin: 5px;
         border: 1px solid transparent;
+        border-radius: 50%;
     }
     .octave-led.active {
         background-color: red;
         border-color: black;
     }
     .striso-controls .led {
-        width: calc(var(--button-size) * 0.5);
-        height: calc(var(--button-size) * 0.5);
+        width: calc(var(--button-size) * 0.3);
+        height: calc(var(--button-size) * 0.3);
         border-radius: 50%;
         background-color: black;
         border: 1px solid black;
@@ -75,15 +70,26 @@
         color: black;
         background: white;
         border: 1px solid black;
+        border-radius: 10%;
         width: var(--button-size);
         height: var(--button-size);
         line-height: var(--button-size);
-        font-size: calc(var(--button-size) * 0.8);
+        font-size: calc(var(--button-size));
         box-shadow: 1px 1px black;      
         padding: 0;
     }
+    .up, .down {
+        margin-bottom:5px;
+        background-color: transparent !important;
+        border: transparent;
+        box-shadow: none;
+    }
+    .up {
+        margin-top: 2px;
+    }
     .striso-controls button:hover {
         background: #eee;
+        color: #333;
     }
     .striso-controls button:active, .striso-controls button.active {
         box-shadow: none;
