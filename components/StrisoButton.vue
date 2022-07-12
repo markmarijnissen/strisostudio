@@ -145,6 +145,7 @@ export default {
                         this.up();
                         break;
                     case STRISO_MOVE:
+                        this.velocity = e[4];
                         this.move({
                             clientX: e[2] * this.size * 0.5, 
                             clientY: e[3] * this.size * 0.5

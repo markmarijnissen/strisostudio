@@ -87,23 +87,23 @@ export const createMidi2Striso = () => {
         else if (isPitchBend(msg)) { 
             const n = channel2note(c);
             if (!n) {
-                console.warn("pressure without note", n, c, channels, buttons, msg);
+                console.warn("pitch bend without note", n, c, channels, buttons, msg);
                 return null;
             }
             const value = scale(kk(msg[1], msg[2]), 0, 16384, -1, 1);
-            buttons[n][1] = value;
-            return [STRISO_MOVE, n].concat(buttons[n]);
+            buttons[n][0] = value;
+            return [STRISO_MOVE, n].concat(buttons[n]); 
         }
         else if (isMidiPressure(msg)) {
-            const n = channel2note(c);
+            const n = channel2note(c);   // [ MIDI_STRISO_PRESSURE, value ]
             const value = msg[1] / 127;
             if (!n) {
                 console.warn("pressure without note", n, c, channels, buttons, msg);
                 return null;
             }
             if (!buttons[n]) buttons[n] = [0, 0, 0];
-            buttons[n][2] = value;
-            return [STRISO_MOVE, n].concat(buttons[n]);
+            buttons[n][2] = value; // [ x, y, z]
+            return [STRISO_MOVE, n].concat(buttons[n]); // [ STRISO_MOVE, note, x, y, z]
         }
 
         const sendMotion = [

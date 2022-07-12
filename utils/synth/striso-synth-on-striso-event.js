@@ -23,6 +23,7 @@ export default async function (synth, e, i) {
         case STRISO_MOVE:
             synth.setParamValue(`/strisy/v${i}/but_y`, e[2]);
             synth.setParamValue(`/strisy/v${i}/vpres`, e[3]);
+            synth.setParamValue(`/strisy/v${i}/pres`, e[4]);
             break;
 
         case STRISO_MOTION:
