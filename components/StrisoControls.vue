@@ -16,6 +16,12 @@
     </div>
 </template>
 <style scoped>
+
+    .simple .title,
+    .simple .glissando,
+    .simple .led {
+        visibility: hidden;
+    }
     .title {
         transform: rotate(-21deg) skewX(-21deg);
         font-size: calc(var(--button-size) * 0.5);

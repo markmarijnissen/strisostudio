@@ -100,6 +100,9 @@
 .options-panel {
     padding-left: 20px;
 }
+.simple .title {
+  display: none;
+}
 </style>
 <script>
 import EventGate from './EventGate.vue'

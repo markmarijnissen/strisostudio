@@ -12,6 +12,10 @@
     /* border-radius: 5%; */
     border: 1px solid black;
 }
+.striso-board.white, .striso-board.transparent {
+    background: transparent;
+    border-color: transparent;
+}
 .striso-board .dcompose-layout {
     margin: 0;
     position: absolute;

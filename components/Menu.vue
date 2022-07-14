@@ -5,6 +5,9 @@
         <li class="pure-menu-item">
             <nuxt-link to="/board/" class="pure-menu-link">vStriso</nuxt-link>
         </li>
+        <li class="pure-menu-item">
+            <nuxt-link to="/songs/" class="pure-menu-link">Songs</nuxt-link>
+        </li>
         <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
             <a href="#" class="pure-menu-link">Web Components</a>
             <ul class="pure-menu-children">

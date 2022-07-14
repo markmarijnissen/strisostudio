@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="!url"><input type="file" @change="onSelectFile" /></div>
+        <div v-if="!url && !disableFileInput"><input type="file" @change="onSelectFile" /></div>
         <button v-if="!isPlaying" @click.prevent="play">▶️</button>
         <button v-else @click.prevent="pause">⏸︎</button>
         <button @click.prevent="stop">⏹️</button>
@@ -30,6 +30,10 @@ export default {
             type: String,
             default: "striso-input"
         },
+        disableFileInput: {
+            type: Boolean,
+            default: false
+        },
         url: String
     },
     data(){
@@ -40,12 +44,7 @@ export default {
         }
     },
     async created(){
-        if(this.url) {
-            const res = await fetch(this.url);
-            const blob = await res.blob();
-            const buffer = await blob.arrayBuffer();
-            this.loadMidiData(buffer);
-        }
+        this.loadFromUrl();
     },
     methods: {
         play(){
@@ -82,6 +81,14 @@ export default {
                 reader.readAsArrayBuffer(file);
             }
         },
+        async loadFromUrl() {
+            if(this.url) {
+                const res = await fetch(this.url);
+                const blob = await res.blob();
+                const buffer = await blob.arrayBuffer();
+                this.loadMidiData(buffer);
+            }
+        },
         loadMidiData(data) {
             if(this.player) this.player.stop();
             this.player = JZZ.MIDI.SMF(data).player();
@@ -97,6 +104,9 @@ export default {
                 this.time = Math.round(this.player.position());
             }
         }
+    },
+    watch: {
+        "url":"loadFromUrl"
     }
 }
 </script>
